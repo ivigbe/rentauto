@@ -15,11 +15,12 @@ class Home
 	def Connection conectar() throws Exception
 	{
 		Class.forName("com.mysql.jdbc.Driver")
+		
 		return DriverManager.getConnection("jdbc:mysql://localhost/")
 
 	}
 
-	def registrarUsuario(Usuario usuarionuevo) 
+	def registrarUsuario(Usuario usuarionuevo)
 	{
 		try 
 		{
@@ -70,7 +71,7 @@ class Home
 			
 			rs = ps.executeQuery()
 			
-			rs.next()
+			return rs.next()
 			
 			}
 			 
