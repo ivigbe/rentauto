@@ -15,7 +15,7 @@ class Home
 	def Connection conectar() throws Exception
 	{
 		Class.forName("com.mysql.jdbc.Driver")
-		return DriverManager.getConnection("jdbc:mysql://localhost/")
+		return DriverManager.getConnection("jdbc:mysql://localhost/RentaAutos?user=root&password=root")
 
 	}
 
