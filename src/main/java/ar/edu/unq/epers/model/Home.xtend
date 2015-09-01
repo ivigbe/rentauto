@@ -29,9 +29,10 @@ class Home {
 			ps.setString(1, usuarionuevo.nombre)
 			ps.setString(2, usuarionuevo.apellido)
 			ps.setString(3, usuarionuevo.nombreUsuario)
-			ps.setString(4, usuarionuevo.email)
-			ps.setDate(5, usuarionuevo.fechaNacimiento)
-			ps.setBoolean(6, false)
+			ps.setString(4, usuarionuevo.password)
+			ps.setObject(5, usuarionuevo.email)
+			ps.setDate(6, usuarionuevo.fechaNacimiento)
+			ps.setBoolean(7, false)
 
 		} finally {
 			if (ps != null)
@@ -87,10 +88,33 @@ class Home {
 		}
 	}
 
-	def actualizar() {
-		
-		c = this.conectar()
-		
+	def actualizar(Usuario u) {
+		try {
+
+			c = this.conectar()
+			ps = c.
+				prepareStatement(
+					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ? FECHANACIMIENTO = ?, VALIDADO = ?"
+				)
+
+			ps.setString(1, u.nombre)
+			ps.setString(2, u.apellido)
+			ps.setString(3, u.nombreUsuario)
+			ps.setString(4, u.password)
+			ps.setString(5, u.email)
+			ps.setDate(6, u.fechaNacimiento)
+			ps.setBoolean(7, true)
+
+			rs = ps.executeQuery()
+
+		} finally {
+
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}
 	}
 
 }

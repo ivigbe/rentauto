@@ -1,4 +1,4 @@
-package ar.edu.unq.epers.model
+package exceptions
 
 class ValidacionException extends RuntimeException{
 	
