@@ -11,15 +11,26 @@ class Home {
 	PreparedStatement ps
 	ResultSet rs
 
-	def Connection conectar() throws Exception
-	{
+	def Connection conectar() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver")
 
 		return DriverManager.getConnection("jdbc:mysql://localhost/RentaAutos?user=root&password=root")
-
 	}
 
-	def registrarUsuario(Usuario usuarionuevo) {
+	def rearmarUsuario(ResultSet rs2){
+		val user = new Usuario => [nombre = rs2.getString("NOMBRE")
+								apellido = rs2.getString("APELLIDO")
+								nombreUsuario = rs2.getString("NOMBREUSUARIO")
+								password = rs2.getString("PASSWORD")
+								email = rs2.getString("EMAIL")
+								fechaNacimiento = rs2.getDate("FECHADENACIMIENTO")
+								validado = rs2.getBoolean("VALIDADO")
+								]
+
+		return user	
+	}
+
+	def ingresarNuevoUsuario(Usuario usuarionuevo) {
 		try {
 			c = this.conectar()
 			ps = c.
@@ -33,6 +44,8 @@ class Home {
 			ps.setObject(5, usuarionuevo.email)
 			ps.setDate(6, usuarionuevo.fechaNacimiento)
 			ps.setBoolean(7, false)
+			
+			ps.executeQuery()
 
 		} finally {
 			if (ps != null)
@@ -41,53 +54,27 @@ class Home {
 			if (c != null)
 				c.close()
 		}
-
 	}
-
-	def ingresarUsuarioHome(String userName, String password) {
-	}
-
-	def cambiarPasswordHome(String user, String password, String newPassword) {
-	}
-
-	def getUsuarioPorCodigo(String n) {
+	
+	def guardarCodigoValidacion(String user, String cod){
 		try {
 			c = this.conectar()
-
 			ps = c.
 				prepareStatement(
-					"SELECT * FROM USUARIO JOIN USUARIO_CODIGO ON USUARIO.NOMBREUSUARIO = USUARIO_CODIGO.NOMBREUSUARIO WHERE CODIGO = ?"
+					"INSERT INTO USUARIO_CODIGO (NOMBREUSUARIO, CODIGO) VALUES (?,?)"
 				)
-			ps.setString(1, n)
-
-			rs = ps.executeQuery()
-
-			if (rs.next()) {
-				val u = new Usuario => [
-
-					nombre = rs.getString("NOMBRE")
-					apellido = rs.getString("APELLIDO")
-					nombreUsuario = rs.getString("NOMBREUSUARIO")
-					password = rs.getString("PASSWORD")
-					email = rs.getString("EMAIL")
-					fechaNacimiento = rs.getDate("FECHADENACIMIENTO")
-					validado = rs.getBoolean("VALIDADO")
-				]
-
-				return u
-			} else {
-				return null
-			}
-
+			ps.setString(1, user)
+			ps.setString(2, cod)
+			ps.executeQuery()
 		} finally {
 			if (ps != null)
 				ps.close()
-
+				
 			if (c != null)
 				c.close()
 		}
 	}
-
+	
 	def actualizar(Usuario u) {
 		try {
 
@@ -116,5 +103,87 @@ class Home {
 				c.close()
 		}
 	}
+	
+	def getUsuarioPorCodigo(String n) {
+		try {
+			c = this.conectar()
 
+			ps = c.
+				prepareStatement(
+					"SELECT * FROM USUARIO JOIN USUARIO_CODIGO ON USUARIO.NOMBREUSUARIO = USUARIO_CODIGO.NOMBREUSUARIO WHERE CODIGO = ?"
+				)
+			ps.setString(1, n)
+
+			rs = ps.executeQuery()
+
+			if (rs.next()) {
+				return rearmarUsuario(rs)
+			} else {
+				return null
+			}
+
+		} finally {
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}
+	}
+	
+	def getUsuarioPorNombreUsuario(String nombreUser) {
+		try {
+			c = this.conectar()
+
+			ps = c.
+				prepareStatement(
+					"SELECT * FROM USUARIO WHERE NOMBREUSUARIO = ?"
+				)
+			ps.setString(1, nombreUser)
+
+			rs = ps.executeQuery()
+
+			if (rs.next()) {
+				return rearmarUsuario(rs)
+			} else {
+				return null
+			}
+
+		} finally {
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}		
+	}
+	
+	def getUsuarioPorLogin(String user, String pass) {
+		try {
+			c = this.conectar()
+
+			ps = c.
+				prepareStatement(
+					"SELECT * FROM USUARIO WHERE NOMBREUSUARIO = ? and PASSWORD = ?"
+				)
+			ps.setString(1, user)
+			ps.setString(2, pass)
+
+			rs = ps.executeQuery()
+
+			if (rs.next()) {
+				return rearmarUsuario(rs)
+			} else {
+				return null
+			}
+
+		} finally {
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}
+	}
+	
 }

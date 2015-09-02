@@ -15,8 +15,11 @@ class Usuario {
 	Boolean validado;
 
 	def validar() {
-
 		this.validado = true
+	}
+	
+	def upDatePassword(String newPass) {
+		this.password = newPass
 	}
 
 }
