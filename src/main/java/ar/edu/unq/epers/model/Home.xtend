@@ -104,6 +104,30 @@ class Home {
 		}
 	}
 	
+	def getUsuarioPor( String parametro){ //este ignorenlo que estoy viendo solamente como hcer "factor comun" de los otros 3 getters
+		try {
+			c = this.conectar()
+
+			parametro.toUpperCase
+
+			rs = ps.executeQuery()
+
+			if (rs.next()) {
+				return rearmarUsuario(rs)
+			} else {
+				return null
+			}
+
+		} finally {
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}
+		
+	}
+	
 	def getUsuarioPorCodigo(String n) {
 		try {
 			c = this.conectar()
@@ -187,3 +211,15 @@ class Home {
 	}
 	
 }
+
+/*PARA DESPUES import java.util.Calendar;
+import java.util.Date;
+ 
+ 
+public class ObtenerFechaHora {
+ 
+ public static void main ( String args[] ) {
+   
+  Date fecha1 = new Date ();
+   
+  System.out.println(fecha1.toString()); */
