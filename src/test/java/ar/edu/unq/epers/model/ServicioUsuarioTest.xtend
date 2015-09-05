@@ -5,7 +5,9 @@ import static org.mockito.Mockito.*;
 import org.junit.Test
 import static org.junit.Assert.*
 import java.sql.Date
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class ServicioUsuarioTest {
 
 	EnviadorDeMails enviadorMails
@@ -48,7 +50,7 @@ class ServicioUsuarioTest {
 
 	@Test
 	def void testRegistrarUsuario() {
-
+		
 		servicio.registrarUsuario(u1)
 		assertEquals(u1.validado, false)
 	}

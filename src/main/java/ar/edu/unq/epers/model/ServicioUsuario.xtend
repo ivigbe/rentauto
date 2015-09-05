@@ -16,8 +16,8 @@ class ServicioUsuario {
 	def void registrarUsuario(Usuario usuario) throws UsuarioYaExisteException{
 	/*Proposito: Registra a un nuevo usuario en el sistema RentaAuto. */
 	
-		val u = this.home.getUsuarioPorNombreUsuario(usuario.nombreUsuario)
-		if (u != null)
+		val u = this.home.getUsuarioPorNombreUsuario(usuario.nombreUsuario) 
+		if(u != null)
 			throw new UsuarioYaExisteException()
 		
 		//String claveValidacion = new Random()  queria usar random pero por ahora algo simple
