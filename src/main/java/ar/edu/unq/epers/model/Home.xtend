@@ -13,7 +13,6 @@ class Home {
 
 	def Connection conectar() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver")
-
 		return DriverManager.getConnection("jdbc:mysql://localhost/Epers_DB?user=root&password=root")
 	}
 
@@ -35,7 +34,7 @@ class Home {
 			c = this.conectar()
 			ps = c.
 				prepareStatement(
-					"INSERT INTO USUARIO (NOMBRE, APELLIDO, NOMBREUSUARIO, PASSWORD, EMAIL, FECHADENACIMIENTO, VALIDADO) VALUES (?,?,?,?,?,?)"
+					"INSERT INTO USUARIO (NOMBRE, APELLIDO, NOMBREUSUARIO, PASSWORD, EMAIL, FECHADENACIMIENTO, VALIDADO) VALUES (?,?,?,?,?,?,?)"
 				)
 			ps.setString(1, usuarionuevo.nombre)
 			ps.setString(2, usuarionuevo.apellido)
@@ -45,7 +44,8 @@ class Home {
 			ps.setDate(6, usuarionuevo.fechaNacimiento)
 			ps.setBoolean(7, false)
 			
-			ps.executeQuery()
+			ps.execute()
+			
 
 		} finally {
 			if (ps != null)
@@ -65,7 +65,8 @@ class Home {
 				)
 			ps.setString(1, user)
 			ps.setString(2, cod)
-			ps.executeQuery()
+			ps.execute()
+			
 		} finally {
 			if (ps != null)
 				ps.close()
@@ -92,7 +93,7 @@ class Home {
 			ps.setDate(6, u.fechaNacimiento)
 			ps.setBoolean(7, true)
 
-			rs = ps.executeQuery()
+			ps.execute()
 
 		} finally {
 
@@ -134,7 +135,7 @@ class Home {
 
 			ps = c.
 				prepareStatement(
-					"SELECT * FROM USUARIO JOIN USUARIO_CODIGO ON USUARIO.NOMBREUSUARIO = USUARIO_CODIGO.NOMBREUSUARIO WHERE CODIGO = ?"
+					"SELECT NOMBRE, APELLIDO, USUARIO.NOMBREUSUARIO, PASSWORD, EMAIL, FECHADENACIMIENTO, VALIDADO FROM USUARIO JOIN USUARIO_CODIGO ON USUARIO.NOMBREUSUARIO = USUARIO_CODIGO.NOMBREUSUARIO WHERE CODIGO = ?"
 				)
 			ps.setString(1, n)
 
