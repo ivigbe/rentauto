@@ -1,4 +1,4 @@
-package ar.edu.unq.epers.model
+package test
 
 import org.junit.Before
 import static org.mockito.Mockito.*;
@@ -7,8 +7,19 @@ import static org.junit.Assert.*
 import java.sql.Date
 import org.eclipse.xtend.lib.annotations.Accessors
 
+<<<<<<< HEAD:src/test/java/ar/edu/unq/epers/model/ServicioUsuarioTest.xtend
 @Accessors
 class ServicioUsuarioTest {
+=======
+import ar.edu.unq.epers.model.Home
+import ar.edu.unq.epers.model.ServicioUsuario
+import ar.edu.unq.epers.model.EnviadorDeMails
+import ar.edu.unq.epers.model.Mail
+import ar.edu.unq.epers.model.Usuario
+
+
+class TestServicioUsuario {
+>>>>>>> cff2ff13e6e20051231eed44730a06e0b27ad2a2:src/main/java/test/TestServicioUsuario.xtend
 
 	EnviadorDeMails enviadorMails
 
@@ -52,13 +63,28 @@ class ServicioUsuarioTest {
 	def void testRegistrarUsuario() {
 		
 		servicio.registrarUsuario(u1)
-		assertEquals(u1.validado, false)
+		assertFalse(u1.validado)
 	}
 	
+	
 	@Test
+	def void testGenerarClave() {
+
+		val clave = servicio.generarClave(u1)
+		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
+	}
+	
+		@Test
+	def void testI() {
+
+		val clave = servicio.generarClave(u1)
+		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
+	}
+	
+	/*@Test
 	def void testCambiarPassword()
 	{
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
 		assertEquals(u1.password, "pepito")
-	}
+	}*/
 }
