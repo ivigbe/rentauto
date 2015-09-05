@@ -98,6 +98,5 @@ class TestGettersEnHome {
 		println(usuario.validado +" ")
 		
 		assertTrue(usuario.email == "iv@gmail.com")
-	}
-		
+	}		
 }

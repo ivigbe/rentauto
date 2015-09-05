@@ -13,14 +13,17 @@ class ServicioUsuario {
 	Home home
 	Mail mail
 	EnviadorDeMails em
+	
 	new (Home h){
 		this.home = h
 	}
+	
 	def void registrarUsuario(Usuario usuario) throws UsuarioYaExisteException{
 	/*Proposito: Registra a un nuevo usuario en el sistema RentaAuto. */
 	
 		val u = this.home.getUsuarioPorNombreUsuario(usuario.nombreUsuario)
-		if (u != null)
+
+		if(u != null)
 			throw new UsuarioYaExisteException()
 		
 		//String claveValidacion = new Random()  queria usar random pero por ahora algo simple

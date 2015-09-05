@@ -38,7 +38,7 @@ class TestServicioUsuario {
 			apellido = "Perez"
 			nombreUsuario = "ManoloPerez"
 			email = "manolo@gmail.com"
-			fechaNacimiento = new Date(1994, 04, 06)
+			fechaNacimiento = new Date(2015, 06, 06)
 			password = "pepe"
 			validado = false
 		]
@@ -97,7 +97,8 @@ class TestServicioUsuario {
 	@Test
 	def void testCambiarPassword()
 	{
-		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
-		assertEquals(u1.password, "pepito")
+		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "linux")
+		val mostrar = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
+		assertTrue(mostrar.password == "linux")
 	}
 }
