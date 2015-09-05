@@ -1,17 +1,16 @@
 package test
 
-import org.junit.Before
-import static org.mockito.Mockito.*;
-import org.junit.Test
-import static org.junit.Assert.*
-import java.sql.Date
-
-import ar.edu.unq.epers.model.Home
-import ar.edu.unq.epers.model.ServicioUsuario
 import ar.edu.unq.epers.model.EnviadorDeMails
+import ar.edu.unq.epers.model.Home
 import ar.edu.unq.epers.model.Mail
+import ar.edu.unq.epers.model.ServicioUsuario
 import ar.edu.unq.epers.model.Usuario
+import java.sql.Date
+import org.junit.Before
+import org.junit.Test
 
+import static org.junit.Assert.*
+import static org.mockito.Mockito.*
 
 class TestServicioUsuario {
 
@@ -55,7 +54,7 @@ class TestServicioUsuario {
 
 	@Test
 	def void testRegistrarUsuario() {
-
+		
 		servicio.registrarUsuario(u1)
 		assertFalse(u1.validado)
 	}
@@ -68,18 +67,13 @@ class TestServicioUsuario {
 		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
 	}
 	
-		@Test
-	def void testI() {
 
-		val clave = servicio.generarClave(u1)
-		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
-	}
-	
-	 
+/*
 	@Test
 	def void testCambiarPassword()
 	{
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
 		assertEquals(u1.password, "pepito")
 	}
+ */
 }
