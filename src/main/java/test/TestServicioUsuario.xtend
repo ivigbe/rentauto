@@ -29,7 +29,7 @@ class TestServicioUsuario {
 	def void setUp() {
 		this.home = new Home()
 
-		this.servicio = new ServicioUsuario()
+		this.servicio = new ServicioUsuario(home)
 		
 		this.u1 = new Usuario => [
 			
@@ -48,7 +48,7 @@ class TestServicioUsuario {
 
 	// Mock methods: averiguar como se mockea un metodo void (enviarMail())
 	}
-
+	
 	@Test
 	def void testEnviarMail() {
 	}
@@ -75,10 +75,11 @@ class TestServicioUsuario {
 		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
 	}
 	
-	/*@Test
+	 
+	@Test
 	def void testCambiarPassword()
 	{
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
 		assertEquals(u1.password, "pepito")
-	}*/
+	}
 }

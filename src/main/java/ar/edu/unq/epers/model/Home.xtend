@@ -82,7 +82,7 @@ class Home {
 			c = this.conectar()
 			ps = c.
 				prepareStatement(
-					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ? FECHANACIMIENTO = ?, VALIDADO = ?"
+					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ?, FECHADENACIMIENTO = ?, VALIDADO = ?"
 				)
 
 			ps.setString(1, u.nombre)

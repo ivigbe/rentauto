@@ -14,6 +14,8 @@ class Usuario {
 	String password
 	Boolean validado;
 
+
+
 	def validar() {
 		this.validado = true
 	}
