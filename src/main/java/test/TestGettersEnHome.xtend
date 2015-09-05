@@ -38,24 +38,23 @@ class TestGettersEnHome {
 	// Mock methods: averiguar como se mockea un metodo void (enviarMail())
 	}
 
-	@Test
+	/*@Test
 	def void testIngresarNuevoUsuario() {
 		this.home.ingresarNuevoUsuario(usuario)
 		val usu = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
 		assertTrue(usu.apellido == "Perez")
 		
-	}
+	}*/
 	@Test
+	def void testGuardarCodValicacion() {
+		//this.home.guardarCodigoValidacion(usuario.nombreUsuario, "mp3")		
+		val x = this.home.getUsuarioPorCodigo("mp3")
+		assertTrue(x.nombre == "Manolo")
+	}
+	
+		@Test
 	def void testGetUsuarioDesconocido() {
-		usuario = this.home.getUsuarioPorNombreUsuario("jj")
-		/*println(usuario.nombre +" ") 
-		println(usuario.apellido +" " )
-		println(usuario.nombreUsuario +" ")
-		println(usuario.password +" ")
-		println(usuario.email +" ")
-		println(usuario.fechaNacimiento +" ")
-		println(usuario.validado +" ")*/
-		
+		usuario = this.home.getUsuarioPorNombreUsuario("jj")		
 		assertTrue(usuario == null)
 	}
 	

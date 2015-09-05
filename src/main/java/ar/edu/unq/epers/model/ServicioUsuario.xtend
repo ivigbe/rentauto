@@ -1,6 +1,7 @@
 package ar.edu.unq.epers.model
 
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.epers.model.Usuario
 import exceptions.UsuarioNoExisteException
 import exceptions.UsuarioYaExisteException
 import exceptions.ValidacionException
@@ -12,27 +13,29 @@ class ServicioUsuario {
 	Home home
 	Mail mail
 	EnviadorDeMails em
-	
+	new (Home h){
+		this.home = h
+	}
 	def void registrarUsuario(Usuario usuario) throws UsuarioYaExisteException{
 	/*Proposito: Registra a un nuevo usuario en el sistema RentaAuto. */
 	
 		val u = this.home.getUsuarioPorNombreUsuario(usuario.nombreUsuario)
-		if (u == null)
+		if (u != null)
 			throw new UsuarioYaExisteException()
 		
 		//String claveValidacion = new Random()  queria usar random pero por ahora algo simple
 		val claveValidacion = generarClave(usuario) 
 		this.home.ingresarNuevoUsuario(usuario)
 		this.home.guardarCodigoValidacion(usuario.nombreUsuario, claveValidacion)
-		
-		val mail = new Mail => [ 
+		/////////////////////////
+		/*val mail = new Mail => [ 
 			body = "Ayudenos a mejorar la seguridad de nuestro sistema verificando tu direccion de mail. Aqui tiene su codigo de validacion: " + claveValidacion
 			subject = "Por favor valida tu mail"
 			to = usuario.email
 			from = "rentauto@rentauto.com.ar"
 		]
 		
-		em.enviarMail(mail)
+		em.enviarMail(mail)*/
 	}
 	
 	def generarClave(Usuario usuario) { //bobada

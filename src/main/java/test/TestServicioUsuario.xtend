@@ -11,7 +11,7 @@ import ar.edu.unq.epers.model.ServicioUsuario
 import ar.edu.unq.epers.model.EnviadorDeMails
 import ar.edu.unq.epers.model.Mail
 import ar.edu.unq.epers.model.Usuario
-
+import exceptions.UsuarioYaExisteException
 
 class TestServicioUsuario {
 
@@ -24,12 +24,13 @@ class TestServicioUsuario {
 	ServicioUsuario servicio
 	
 	Usuario u1
+	Usuario u2
 
 	@Before
 	def void setUp() {
 		this.home = new Home()
 
-		this.servicio = new ServicioUsuario()
+		this.servicio = new ServicioUsuario (home)
 		
 		this.u1 = new Usuario => [
 			
@@ -39,6 +40,17 @@ class TestServicioUsuario {
 			email = "manolo@gmail.com"
 			fechaNacimiento = new Date(1994, 04, 06)
 			password = "pepe"
+			validado = false
+		]
+		
+		this.u2 = new Usuario => [
+			
+			nombre = "juan"
+			apellido = "pogba"
+			nombreUsuario = "jp"
+			email = "pogba@gmail.com"
+			fechaNacimiento = new Date(1990, 12, 06)
+			password = "gol"
 			validado = false
 		]
 		
@@ -55,6 +67,13 @@ class TestServicioUsuario {
 
 	@Test
 	def void testRegistrarUsuario() {
+
+		servicio.registrarUsuario(u2)
+		assertFalse(u2.validado)
+	}
+	
+	@Test(expected = UsuarioYaExisteException)
+	def void testExpcepcionUsuarioYaRegistrado() {
 
 		servicio.registrarUsuario(u1)
 		assertFalse(u1.validado)
@@ -75,10 +94,10 @@ class TestServicioUsuario {
 		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
 	}
 	
-	/*@Test
+	@Test
 	def void testCambiarPassword()
 	{
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
 		assertEquals(u1.password, "pepito")
-	}*/
+	}
 }

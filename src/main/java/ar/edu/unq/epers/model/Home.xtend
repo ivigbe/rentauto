@@ -45,58 +45,8 @@ class Home {
 			ps.setBoolean(7, false)
 			
 			ps.execute()
-			
 
 		} finally {
-			if (ps != null)
-				ps.close()
-
-			if (c != null)
-				c.close()
-		}
-	}
-	
-	def guardarCodigoValidacion(String user, String cod){
-		try {
-			c = this.conectar()
-			ps = c.
-				prepareStatement(
-					"INSERT INTO USUARIO_CODIGO (NOMBREUSUARIO, CODIGO) VALUES (?,?)"
-				)
-			ps.setString(1, user)
-			ps.setString(2, cod)
-			ps.execute()
-			
-		} finally {
-			if (ps != null)
-				ps.close()
-				
-			if (c != null)
-				c.close()
-		}
-	}
-	
-	def actualizar(Usuario u) {
-		try {
-
-			c = this.conectar()
-			ps = c.
-				prepareStatement(
-					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ? FECHANACIMIENTO = ?, VALIDADO = ?"
-				)
-
-			ps.setString(1, u.nombre)
-			ps.setString(2, u.apellido)
-			ps.setString(3, u.nombreUsuario)
-			ps.setString(4, u.password)
-			ps.setString(5, u.email)
-			ps.setDate(6, u.fechaNacimiento)
-			ps.setBoolean(7, true)
-
-			ps.execute()
-
-		} finally {
-
 			if (ps != null)
 				ps.close()
 
@@ -210,6 +160,59 @@ class Home {
 				c.close()
 		}
 	}
+	////////////////////
+	def guardarCodigoValidacion(String user, String cod){
+		try {
+			c = this.conectar()
+			ps = c.
+				prepareStatement(
+					"INSERT INTO USUARIO_CODIGO (NOMBREUSUARIO, CODIGO) VALUES (?,?)"
+				)
+			ps.setString(1, user)
+			ps.setString(2, cod)
+			ps.execute()
+			
+		} finally {
+			if (ps != null)
+				ps.close()
+				
+			if (c != null)
+				c.close()
+		}
+	}
+	
+	def actualizar(Usuario u) {
+		try {
+
+			c = this.conectar()
+			ps = c.
+				prepareStatement(
+					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ?, FECHADENACIMIENTO = ?, VALIDADO = ? WHERE NOMBREUSUARIO = ?"
+				)
+
+			ps.setString(1, u.nombre)
+			ps.setString(2, u.apellido)
+			ps.setString(3, u.nombreUsuario)
+			ps.setString(4, u.password)
+			ps.setString(5, u.email)
+			ps.setDate(6, u.fechaNacimiento)
+			ps.setBoolean(7, true)
+			
+			ps.setString(8, u.nombreUsuario)
+
+			ps.execute()
+
+		} finally {
+
+			if (ps != null)
+				ps.close()
+
+			if (c != null)
+				c.close()
+		}
+	}
+	
+	
 	
 }
 
