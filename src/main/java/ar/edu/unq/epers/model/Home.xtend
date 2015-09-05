@@ -14,7 +14,7 @@ class Home {
 	def Connection conectar() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver")
 
-		return DriverManager.getConnection("jdbc:mysql://localhost/RentaAutos?user=root&password=root")
+		return DriverManager.getConnection("jdbc:mysql://localhost/Epers_DB?user=root&password=root")
 	}
 
 	def rearmarUsuario(ResultSet rs2){
