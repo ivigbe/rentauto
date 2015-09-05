@@ -44,14 +44,8 @@ class Home {
 			ps.setObject(5, usuarionuevo.email)
 			ps.setDate(6, usuarionuevo.fechaNacimiento)
 			ps.setBoolean(7, false)
-<<<<<<< HEAD
-
-			ps.executeQuery()
-=======
 			
 			ps.execute()
-			
->>>>>>> cff2ff13e6e20051231eed44730a06e0b27ad2a2
 
 		} finally {
 			if (ps != null)
@@ -87,7 +81,7 @@ class Home {
 			c = this.conectar()
 			ps = c.
 				prepareStatement(
-					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ? FECHANACIMIENTO = ?, VALIDADO = ?"
+					"UPDATE USUARIO SET NOMBRE = ?, APELLIDO = ?, NOMBREUSUARIO = ?, PASSWORD = ?, EMAIL = ?, FECHADENACIMIENTO = ?, VALIDADO = ? WHERE NOMBREUSUARIO = ?"
 				)
 
 			ps.setString(1, u.nombre)
@@ -97,6 +91,8 @@ class Home {
 			ps.setString(5, u.email)
 			ps.setDate(6, u.fechaNacimiento)
 			ps.setBoolean(7, true)
+			
+			ps.setString(8, u.nombreUsuario)
 
 			ps.execute()
 
