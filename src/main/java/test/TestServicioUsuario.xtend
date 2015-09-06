@@ -1,16 +1,17 @@
 package test
 
-import ar.edu.unq.epers.model.EnviadorDeMails
-import ar.edu.unq.epers.model.Home
-import ar.edu.unq.epers.model.Mail
-import ar.edu.unq.epers.model.ServicioUsuario
-import ar.edu.unq.epers.model.Usuario
-import java.sql.Date
 import org.junit.Before
+import static org.mockito.Mockito.*;
 import org.junit.Test
-
 import static org.junit.Assert.*
-import static org.mockito.Mockito.*
+import java.sql.Date
+
+import ar.edu.unq.epers.model.Home
+import ar.edu.unq.epers.model.ServicioUsuario
+import ar.edu.unq.epers.model.EnviadorDeMails
+import ar.edu.unq.epers.model.Mail
+import ar.edu.unq.epers.model.Usuario
+import exceptions.UsuarioYaExisteException
 
 class TestServicioUsuario {
 
@@ -23,12 +24,13 @@ class TestServicioUsuario {
 	ServicioUsuario servicio
 	
 	Usuario u1
+	Usuario u2
 
 	@Before
 	def void setUp() {
 		this.home = new Home()
 
-		this.servicio = new ServicioUsuario(home)
+		this.servicio = new ServicioUsuario (home)
 		
 		this.u1 = new Usuario => [
 			
@@ -36,8 +38,19 @@ class TestServicioUsuario {
 			apellido = "Perez"
 			nombreUsuario = "ManoloPerez"
 			email = "manolo@gmail.com"
-			fechaNacimiento = new Date(1994, 04, 06)
+			fechaNacimiento = new Date(2015, 06, 06)
 			password = "pepe"
+			validado = false
+		]
+		
+		this.u2 = new Usuario => [
+			
+			nombre = "juan"
+			apellido = "pogba"
+			nombreUsuario = "jp"
+			email = "pogba@gmail.com"
+			fechaNacimiento = new Date(1990, 12, 06)
+			password = "gol"
 			validado = false
 		]
 		
@@ -47,14 +60,21 @@ class TestServicioUsuario {
 
 	// Mock methods: averiguar como se mockea un metodo void (enviarMail())
 	}
-	
+
 	@Test
 	def void testEnviarMail() {
 	}
 
 	@Test
 	def void testRegistrarUsuario() {
-		
+
+		servicio.registrarUsuario(u2)
+		assertFalse(u2.validado)
+	}
+	
+	@Test(expected = UsuarioYaExisteException)
+	def void testExpcepcionUsuarioYaRegistrado() {
+
 		servicio.registrarUsuario(u1)
 		assertFalse(u1.validado)
 	}
@@ -67,13 +87,19 @@ class TestServicioUsuario {
 		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
 	}
 	
+		@Test
+	def void testI() {
 
-/*
+		val clave = servicio.generarClave(u1)
+		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
+	}
+	
 	@Test
 	def void testCambiarPassword()
 	{
-		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "pepito")
-		assertEquals(u1.password, "pepito")
+		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "linux")
+		val mostrar = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
+		assertTrue(mostrar.password == "linux")
 	}
- */
+
 }
