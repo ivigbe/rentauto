@@ -1,18 +1,13 @@
 package ar.edu.unq.epers.model
-import exceptions.EnviarMailException
+
 import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
-class Mail implements EnviadorDeMails {
-	
+class Mail {
+
 	String body
 	String subject
 	String to
 	String from
-	
-	override enviarMail(Mail m) throws EnviarMailException{
-		
-		
-	}
-	
+
 }

@@ -7,14 +7,13 @@ import static org.junit.Assert.*
 import java.sql.Date
 
 class TestUsuario {
-	
+
 	Usuario u
-	
+
 	@Before
-	def void setUp()
-	{
+	def void setUp() {
 		u = new Usuario => [
-			
+
 			nombre = "Alejandro"
 			apellido = "Lobos"
 			nombreUsuario = "al"
@@ -24,20 +23,18 @@ class TestUsuario {
 			validado = false
 		]
 	}
-	
+
 	@Test
-	def void testValidar()
-	{
+	def void testValidar() {
 		u.validar()
-		
+
 		assertEquals(u.validado, true)
 	}
-	
+
 	@Test
-	def void testUpdatePassword()
-	{
+	def void testUpdatePassword() {
 		u.upDatePassword("lobito")
-		
+
 		assertEquals(u.password, "lobito")
 	}
 }

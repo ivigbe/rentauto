@@ -19,7 +19,7 @@ class Usuario {
 	def validar() {
 		this.validado = true
 	}
-	
+
 	def upDatePassword(String newPass) {
 		this.password = newPass
 	}
