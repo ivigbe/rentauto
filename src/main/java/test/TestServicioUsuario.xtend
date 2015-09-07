@@ -12,6 +12,8 @@ import ar.edu.unq.epers.model.EnviadorDeMails
 import ar.edu.unq.epers.model.Mail
 import ar.edu.unq.epers.model.Usuario
 import exceptions.UsuarioYaExisteException
+import exceptions.PasswordInvalidoException
+import exceptions.ValidacionException
 
 class TestServicioUsuario {
 
@@ -90,10 +92,25 @@ class TestServicioUsuario {
 		assertFalse(u1.validado)
 	}
 
+	// Exceptions tests
 	@Test(expected=UsuarioYaExisteException)
 	def void testExpcepcionUsuarioYaRegistrado() {
 
 		servicio.registrarUsuario(u2)
+		assertFalse(u2.validado)
+	}
+
+	@Test(expected=PasswordInvalidoException)
+	def void testExpcepcionPasswordInvalido() {
+
+		servicio.cambiarPassword("jp", "gol", "gol")
+		assertTrue(u2.password == "gol")
+	}
+
+	@Test(expected=ValidacionException)
+	def void testExcepcionValidacion() {
+
+		servicio.validarCuenta("jppogba@gmail.com")
 		assertFalse(u2.validado)
 	}
 

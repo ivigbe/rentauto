@@ -50,7 +50,10 @@ class ServicioUsuario {
 	def void validarCuenta(String codigoValidacion) throws ValidacionException{
 		/*Proposito: Se valida la cuenta del usuario registrado. */
 		val usuario = this.home.getUsuarioPorCodigo(codigoValidacion)
-		if (usuario == null)
+		if(usuario == null)
+			throw new UsuarioNoExisteException()
+		
+		if(usuario.validado == false)
 			throw new ValidacionException()
 
 		usuario.validar()
