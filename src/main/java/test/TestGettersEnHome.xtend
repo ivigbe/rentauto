@@ -1,7 +1,6 @@
 package test
 
 import org.junit.Before
-//import static org.mockito.Mockito.*;
 import org.junit.Test
 import static org.junit.Assert.*
 import java.sql.Date
@@ -14,83 +13,62 @@ class TestGettersEnHome {
 
 	Home home
 	Usuario usuario
-	
+
 	@Before
 	def void setUp() {
 		this.home = new Home()
-		
-		
+
 		this.usuario = new Usuario => [
-			
-			nombre = "Manolo"
-			apellido = "Perez"
-			nombreUsuario = "ManoloPerez"
-			email = "manolo@gmail.com"
-			fechaNacimiento = new Date(1994, 04, 06)
-			password = "pepe"
+
+			nombre = "Liu"
+			apellido = "Kan"
+			nombreUsuario = "LiuKan"
+			email = "kan@gmail.com"
+			fechaNacimiento = new Date(1910, 04, 06)
+			password = "1234"
 			validado = false
 		]
 	}
 
-	/*@Test
+	@Test
 	def void testIngresarNuevoUsuario() {
 		this.home.ingresarNuevoUsuario(usuario)
-		val usu = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
-		assertTrue(usu.apellido == "Perez")
-		
-	}*/
+		val usu = this.home.getUsuarioPorNombreUsuario("LiuKan")
+		assertTrue(usu.apellido == "Kan")
+
+	}
+
 	@Test
 	def void testGuardarCodValicacion() {
-		//this.home.guardarCodigoValidacion(usuario.nombreUsuario, "mp3")		
+		this.home.guardarCodigoValidacion(usuario.nombreUsuario, "mp3")
 		val x = this.home.getUsuarioPorCodigo("mp3")
-		assertTrue(x.nombre == "Manolo")
+		assertTrue(x.nombre == "Liu")
 	}
-	
-		@Test
+
+	@Test
 	def void testGetUsuarioDesconocido() {
-		usuario = this.home.getUsuarioPorNombreUsuario("jj")		
+		usuario = this.home.getUsuarioPorNombreUsuario("jj")
 		assertTrue(usuario == null)
 	}
-	
+
 	@Test
 	def void testGetUsuarioPorCodigo() {
-		usuario = this.home.getUsuarioPorCodigo("uncodigo")
-		println(usuario.nombre +" ") 
-		println(usuario.apellido +" " )
-		println(usuario.nombreUsuario +" ")
-		println(usuario.password +" ")
-		println(usuario.email +" ")
-		println(usuario.fechaNacimiento +" ")
-		println(usuario.validado +" ")
-		
+		usuario = this.home.getUsuarioPorCodigo("120")
+
 		assertTrue(usuario.apellido == "vigo")
 	}
-	
+
 	@Test
 	def void testGetUsuarioPorNombreDeUsuario() {
 		usuario = this.home.getUsuarioPorNombreUsuario("ib")
-		println(usuario.nombre +" ") 
-		println(usuario.apellido +" " )
-		println(usuario.nombreUsuario +" ")
-		println(usuario.password +" ")
-		println(usuario.email +" ")
-		println(usuario.fechaNacimiento +" ")
-		println(usuario.validado +" ")
-		
+
 		assertTrue(usuario.nombre == "ivan")
 	}
-	
+
 	@Test
 	def void testGetUsuarioPorLogin() {
-		usuario = this.home.getUsuarioPorLogin("ib", "puto")
-		println(usuario.nombre +" ") 
-		println(usuario.apellido +" " )
-		println(usuario.nombreUsuario +" ")
-		println(usuario.password +" ")
-		println(usuario.email +" ")
-		println(usuario.fechaNacimiento +" ")
-		println(usuario.validado +" ")
-		
+		usuario = this.home.getUsuarioPorLogin("ib", "123")
+
 		assertTrue(usuario.email == "iv@gmail.com")
-	}		
+	}
 }
