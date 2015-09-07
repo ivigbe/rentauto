@@ -87,18 +87,11 @@ class TestServicioUsuario {
 		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
 	}
 	
-		@Test
-	def void testI() {
-
-		val clave = servicio.generarClave(u1)
-		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
-	}
-	
 	@Test
 	def void testCambiarPassword()
 	{
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "linux")
-		val mostrar = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
-		assertTrue(mostrar.password == "linux")
+		val usuario = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
+		assertTrue(usuario.password == "linux")
 	}
 }

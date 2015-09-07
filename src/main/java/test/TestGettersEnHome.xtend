@@ -30,12 +30,6 @@ class TestGettersEnHome {
 			password = "pepe"
 			validado = false
 		]
-		/* 
-		// Mock instances:
-		this.enviadorMails = mock(EnviadorDeMails)
-		this.mail = mock(Mail)*/
-
-	// Mock methods: averiguar como se mockea un metodo void (enviarMail())
 	}
 
 	/*@Test
