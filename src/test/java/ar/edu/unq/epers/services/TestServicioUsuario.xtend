@@ -1,19 +1,19 @@
-package test
+package ar.edu.unq.epers.services
 
-import org.junit.Before
-import static org.mockito.Mockito.*;
-import org.junit.Test
-import static org.junit.Assert.*
-import java.sql.Date
-
-import ar.edu.unq.epers.model.Home
-import ar.edu.unq.epers.model.ServicioUsuario
-import ar.edu.unq.epers.model.EnviadorDeMails
-import ar.edu.unq.epers.model.Mail
+import ar.edu.unq.epers.exceptions.PasswordInvalidoException
+import ar.edu.unq.epers.exceptions.UsuarioYaExisteException
+import ar.edu.unq.epers.exceptions.ValidacionException
+import ar.edu.unq.epers.mailing.EnviadorDeMails
+import ar.edu.unq.epers.mailing.Mail
+import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.model.Usuario
-import exceptions.UsuarioYaExisteException
-import exceptions.PasswordInvalidoException
-import exceptions.ValidacionException
+import java.sql.Date
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
+import static org.mockito.Matchers.*
+import static org.mockito.Mockito.*
 
 class TestServicioUsuario {
 
@@ -21,7 +21,7 @@ class TestServicioUsuario {
 
 	Mail mail
 
-	Home home
+	HomeUsuario home
 
 	ServicioUsuario servicio
 
@@ -36,7 +36,7 @@ class TestServicioUsuario {
 		this.enviadorMails = mock(EnviadorDeMails)
 
 		// Services and Home
-		this.home = new Home()
+		this.home = mock(HomeUsuario)
 
 		this.servicio = new ServicioUsuario(home, enviadorMails)
 
@@ -96,6 +96,8 @@ class TestServicioUsuario {
 	@Test(expected=UsuarioYaExisteException)
 	def void testExpcepcionUsuarioYaRegistrado() {
 
+		when(home.getUsuarioPorNombreUsuario("jp")).thenReturn(u2)
+
 		servicio.registrarUsuario(u2)
 		assertFalse(u2.validado)
 	}
@@ -110,22 +112,19 @@ class TestServicioUsuario {
 	@Test(expected=ValidacionException)
 	def void testExcepcionValidacion() {
 
+		when(home.getUsuarioPorCodigo("jppogba@gmail.com")).thenReturn(u2)
+
 		servicio.validarCuenta("jppogba@gmail.com")
 		assertFalse(u2.validado)
 	}
 
 	@Test
-	def void testGenerarClave() {
-
-		val clave = servicio.generarClave(u1)
-		assertTrue(clave == "ManoloPerezmanolo@gmail.com")
-	}
-
-	@Test
 	def void testCambiarPassword() {
+
+		when(this.home.getUsuarioPorNombreUsuario("ManoloPerez")).thenReturn(u1)
+
 		servicio.cambiarPassword(u1.nombreUsuario, u1.password, "linux")
-		val usuario = this.home.getUsuarioPorNombreUsuario("ManoloPerez")
-		assertTrue(usuario.password == "linux")
+		assertTrue(u1.password == "linux")
 	}
 
 }

@@ -1,4 +1,4 @@
-package ar.edu.unq.epers.model
+package ar.edu.unq.epers.mailing
 
 import org.eclipse.xtend.lib.annotations.Accessors
 

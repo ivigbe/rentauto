@@ -15,12 +15,14 @@ class Usuario {
 	Boolean validado;
 
 
-
 	def validar() {
 		this.validado = true
 	}
 
-	def upDatePassword(String newPass) {
+	/**
+	 * Proposito: El usuario actualiza su password.
+	 */
+	def updatePassword(String newPass) {
 		this.password = newPass
 	}
 
