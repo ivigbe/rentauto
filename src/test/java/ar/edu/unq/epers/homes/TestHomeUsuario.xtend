@@ -1,22 +1,22 @@
-package test
+package ar.edu.unq.epers.homes
 
 import org.junit.Before
 import org.junit.Test
 import static org.junit.Assert.*
 import java.sql.Date
 import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.epers.model.Home
+import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.model.Usuario
 
 @Accessors
-class TestGettersEnHome {
+class TestHomeUsuario {
 
-	Home home
+	HomeUsuario home
 	Usuario usuario
 
 	@Before
 	def void setUp() {
-		this.home = new Home()
+		this.home = new HomeUsuario()
 
 		this.usuario = new Usuario => [
 

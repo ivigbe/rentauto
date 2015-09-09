@@ -1,4 +1,4 @@
-package test
+package ar.edu.unq.epers.model
 
 import ar.edu.unq.epers.model.Usuario
 import org.junit.Before
@@ -33,7 +33,7 @@ class TestUsuario {
 
 	@Test
 	def void testUpdatePassword() {
-		u.upDatePassword("lobito")
+		u.updatePassword("lobito")
 
 		assertEquals(u.password, "lobito")
 	}
