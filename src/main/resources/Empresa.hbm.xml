@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="ar.edu.unq.epers.model.Empresa" table="EMPRESA">
+		<id name="empresa_id" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+
+		<property name="cuit" type="string"></property>
+
+		<property name="nombreEmpresa" type="string"></property>
+
+		<property name="cantidadMaximaDeReservasActivas" type="int"></property>
+		
+		<property name="valorMaximoPorDia" type="double"></property>
+		
+		<bag name="usuarios" inverse="true" cascade="save-update">
+        	<key column="iusuario_id" />
+        	<one-to-many class="ar.edu.unq.epers.model.IUsuario" />
+        </bag>
+        
+        <bag name="reservas" inverse="true" cascade="save-update">
+        	<key column="reserva_id" />
+        	<one-to-many class="ar.edu.unq.epers.model.Reserva" />
+        </bag>
+        
+        <bag name="categoriasAdmitidas" inverse="true" cascade="save-update">
+        	<key column="categoria_id" />
+        	<one-to-many class="ar.edu.unq.epers.model.Categoria" />
+        </bag>
+
+	</class>
+</hibernate-mapping>

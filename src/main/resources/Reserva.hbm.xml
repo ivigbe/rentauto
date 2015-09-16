@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="ar.edu.unq.epers.model.Reserva" table="RESERVA">
+		<id name="reserva_id" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+
+		<property name="numeroSolicitud" type="int"></property>
+		
+        <one-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacion_id" not-null="true" cascade="save-update" />
+        
+        <one-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacion_id" not-null="true" cascade="save-update" />
+        
+        <property name="inicio" type="date"></property>
+        
+        <property name="fin" type="date"></property>
+        
+        <one-to-one name="auto" class="ar.edu.unq.epers.model.Auto" column="auto_id" not-null="true" cascade="save-update" />
+        
+        <one-to-one name="usuario" class="ar.edu.unq.epers.model.IUsuario" column="iusuario_id" not-null="true" cascade="save-update" />
+        
+        <joined-subclass name="ar.edu.unq.epers.model.Reserva" table="RESERVA_EMPRESARIAL">
+        	<key column="empresarial_id" />
+        </joined-subclass>
+
+	</class>
+</hibernate-mapping>
