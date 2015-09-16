@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA">
+		<id name="categoria_id" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+
+		<property name="nombre" type="string"></property>
+		
+		<!-- PREGUNTAR LO DE LAS SUBCLASES DE CATEGORIA, QUE ESTAN DENTRO DEL MISMO ARCHIVO JAVA DE LA SUPERCLASE -->
+		
+		<joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_TURISMO">
+        	<key column="turismo_id" />
+        </joined-subclass>
+        
+        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_FAMILIAR">
+        	<key column="familiar_id" />
+        </joined-subclass>
+        
+        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_DEPORTIVO">
+        	<key column="deportivo_id" />
+        </joined-subclass>
+        
+        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_TODOTERRENO">
+        	<key column="todoterreno_id" />
+        </joined-subclass>
+
+	</class>
+</hibernate-mapping>
