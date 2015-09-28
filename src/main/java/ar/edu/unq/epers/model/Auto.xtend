@@ -12,12 +12,13 @@ class Auto {
 	String patente
 	Double costoBase
 	Categoria categoria
+	Integer autoId
 	
 	//Debe estar ordenado
 	List<Reserva> reservas = newArrayList()
 	Ubicacion ubicacionInicial
 
-	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial){
+	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial, Integer id){
 		this.marca = marca
 		this.modelo = modelo
 		this.año = anio
@@ -25,6 +26,7 @@ class Auto {
 		this.costoBase = costoBase
 		this.categoria = categoria
 		this.ubicacionInicial = ubicacionInicial
+		this.autoId = id
 	}
 
 	def getUbicacion(){

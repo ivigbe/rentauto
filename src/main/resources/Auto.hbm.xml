@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 	<class name="ar.edu.unq.epers.model.Auto" table="AUTO">
-		<id name="auto_id" type="java.lang.Integer">
+		<id name="autoId" type="java.lang.Integer">
 			<generator class="identity" />
 		</id>
 
@@ -17,9 +17,13 @@
 		<property name="patente" type="string"></property>
 
 		<property name="costoBase" type="double"></property>
+		
+		
 
 		<one-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
-			column="categoria_id" not-null="true" cascade="save-update" />
+		column="categoriaId" not-null="true" cascade="save-update" />
+		
+		<!--
 		
 		<bag name="reservas" inverse="true" cascade="save-update">
         	<key column="reserva_id" />
@@ -29,5 +33,6 @@
         <one-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
 			column="ubicacion_id" not-null="true" cascade="save-update" />
 
+		-->
 	</class>
 </hibernate-mapping>

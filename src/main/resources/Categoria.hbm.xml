@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 	<class name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA">
-		<id name="categoria_id" type="java.lang.Integer">
+		<id name="categoriaId" type="java.lang.Integer">
 			<generator class="identity" />
 		</id>
 
