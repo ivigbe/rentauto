@@ -1,41 +1,26 @@
 package ar.edu.unq.epers.services
 
 import ar.edu.unq.epers.homes.GenericHome
-import ar.edu.unq.epers.model.Auto
-import ar.edu.unq.epers.model.Categoria
-import ar.edu.unq.epers.model.Ubicacion
 import ar.edu.unq.epers.homes.SessionManager
+import ar.edu.unq.epers.model.Auto
 
 class ServicioAuto {
-	
-	GenericHome<Auto> homeAuto
-	GenericHome<Categoria> homeCategoria
-	GenericHome<Ubicacion> homeUbicacion
-	
-	new(GenericHome<Auto> homeAuto, GenericHome<Categoria> homeCat, GenericHome<Ubicacion> homeUbi){
-		
-		this.homeAuto = homeAuto
-		this.homeCategoria = homeCat
-		this.homeUbicacion = homeUbi
-		
+
+	GenericHome<Auto> home
+
+	new(GenericHome<Auto> h) {
+		home = h
 	}
-	
-	def void crearAuto(String marca, String modelo, Integer anio, String patente, Integer categoriaId, Double costoBase, Integer ubicacionId, Integer id)
-	{
+
+	def void crearAuto(Auto auto) {
 		SessionManager.runInSession([
-			var categoria = homeCategoria.get(categoriaId)
-			var ubicacion = homeUbicacion.get(ubicacionId)
-			var auto = new Auto(marca, modelo, anio, patente, categoria, costoBase, ubicacion, id)
-			homeAuto.save(auto)
-			auto
+			home.save(auto)
 		])
 	}
-	
-	def getAutoPorId(int id)
-	{
-		SessionManager.runInSession[
-			
-			homeAuto.get(id)
+
+	def getAutoPorId(int id) {
+		SessionManager.runInSession [
+			home.get(id)
 		]
 	}
 }

@@ -9,12 +9,12 @@ class HomeProvider {
 	def static getAutoHome() {
 		new GenericHome(Auto)
 	}
-
-	def static getCategoriaHome() {
+	
+	def static getCategoria() {
 		new GenericHome(Categoria)
 	}
 
-	def static getUbicacionHome() {
+	def static getUbicacion() {
 		new GenericHome(Ubicacion)
 	}
 }

@@ -20,6 +20,14 @@ class SessionManager {
 		sessionFactory;
 	}
 	
+	
+	def static void  runInSession(Runnable  cmd){
+		runInSession[|
+			cmd.run
+			null
+		]		
+	}
+	
 	def static <T> T runInSession(Function0<T> cmd){
 		var sessionFactory = SessionManager.getSessionFactory();
 		var Transaction transaction = null;
