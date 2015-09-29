@@ -3,8 +3,10 @@ package ar.edu.unq.epers.model
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 @Accessors
+//@EqualsHashCode //Para que genere los metodos equals y hashcode. Sirve para hacer la comparacion entre objetos
 class Auto {
 	String marca
 	String modelo
@@ -17,8 +19,10 @@ class Auto {
 	//Debe estar ordenado
 	List<Reserva> reservas = newArrayList()
 	Ubicacion ubicacionInicial
+	
+	new(){}
 
-	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial, Integer id){
+	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial){
 		this.marca = marca
 		this.modelo = modelo
 		this.año = anio
@@ -26,7 +30,6 @@ class Auto {
 		this.costoBase = costoBase
 		this.categoria = categoria
 		this.ubicacionInicial = ubicacionInicial
-		this.autoId = id
 	}
 
 	def getUbicacion(){
@@ -36,9 +39,9 @@ class Auto {
 	def ubicacionParaDia(Date unDia){
 		val encontrado = reservas.findLast[ it.fin <= unDia ]
 		if(encontrado != null){
-			return encontrado.destino
+			encontrado.destino
 		}else{
-			return ubicacionInicial
+			ubicacionInicial
 		}
 	}
 	
@@ -53,7 +56,12 @@ class Auto {
 	}
 	
 	def costoTotal(){
-		return categoria.calcularCosto(this)
+		categoria.calcularCosto(this)
+	}
+	
+	override def equals(Object object){
+		val otroAauto = object as Auto
+		otroAauto != null && otroAauto.autoId == autoId
 	}
 	
 }

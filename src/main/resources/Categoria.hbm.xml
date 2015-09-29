@@ -8,25 +8,16 @@
 			<generator class="identity" />
 		</id>
 
-		<property name="nombre" type="string"></property>
+		<discriminator column="p"/>
+		<property name="nombre" type="string" ></property>
 		
-		<!-- PREGUNTAR LO DE LAS SUBCLASES DE CATEGORIA, QUE ESTAN DENTRO DEL MISMO ARCHIVO JAVA DE LA SUPERCLASE -->
-		
-		<joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_TURISMO">
-        	<key column="turismo_id" />
-        </joined-subclass>
+		<subclass name="ar.edu.unq.epers.model.Turismo" extends="Categoria" discriminator-value="Turismo"></subclass>
         
-        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_FAMILIAR">
-        	<key column="familiar_id" />
-        </joined-subclass>
+        <subclass name="ar.edu.unq.epers.model.Familiar" extends="Categoria" discriminator-value="Familiar"></subclass>
+          
+        <subclass name="ar.edu.unq.epers.model.Deportivo" extends="Categoria" discriminator-value="Deportivo"></subclass>
         
-        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_DEPORTIVO">
-        	<key column="deportivo_id" />
-        </joined-subclass>
+        <subclass name="ar.edu.unq.epers.model.TodoTerreno" extends="Categoria" discriminator-value="TodoTerreno">  </subclass>
         
-        <joined-subclass name="ar.edu.unq.epers.model.Categoria" table="CATEGORIA_TODOTERRENO">
-        	<key column="todoterreno_id" />
-        </joined-subclass>
-
 	</class>
 </hibernate-mapping>

@@ -15,9 +15,9 @@
         
         <!-- List of mapping files -->
         <mapping resource="Auto.hbm.xml" />
-        <mapping resource="Categoria.hbm.xmll" />
+        <mapping resource="Categoria.hbm.xml" />
         <!--
-        <mapping resource="Empresa.hbm.xmll" />
+        <mapping resource="Empresa.hbm.xml" />
         <mapping resource="IUsuario.hbm.xml" />
         <mapping resource="Reserva.hbm.xml" />
         <mapping resource="Ubicacion.hbm.xml" />
