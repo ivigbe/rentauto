@@ -8,18 +8,25 @@ import ar.edu.unq.epers.homes.SessionManager
 
 class ServicioAuto {
 	
-	GenericHome<Auto> home
+	GenericHome<Auto> homeAuto
+	GenericHome<Categoria> homeCategoria
+	GenericHome<Ubicacion> homeUbicacion
 	
-	new(GenericHome<Auto> h){
+	new(GenericHome<Auto> homeAuto, GenericHome<Categoria> homeCat, GenericHome<Ubicacion> homeUbi){
 		
-		home = h
+		this.homeAuto = homeAuto
+		this.homeCategoria = homeCat
+		this.homeUbicacion = homeUbi
+		
 	}
 	
-	def void crearAuto(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial, Integer id)
+	def void crearAuto(String marca, String modelo, Integer anio, String patente, Integer categoriaId, Double costoBase, Integer ubicacionId, Integer id)
 	{
 		SessionManager.runInSession([
-			var auto = new Auto(marca, modelo, anio, patente, categoria, costoBase, ubicacionInicial, id)
-			home.save(auto)
+			var categoria = homeCategoria.get(categoriaId)
+			var ubicacion = homeUbicacion.get(ubicacionId)
+			var auto = new Auto(marca, modelo, anio, patente, categoria, costoBase, ubicacion, id)
+			homeAuto.save(auto)
 			auto
 		])
 	}
@@ -28,7 +35,7 @@ class ServicioAuto {
 	{
 		SessionManager.runInSession[
 			
-			home.get(id)
+			homeAuto.get(id)
 		]
 	}
 }

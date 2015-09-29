@@ -4,13 +4,13 @@
 
 <hibernate-mapping>
 	<class name="ar.edu.unq.epers.model.Ubicacion" table="UBICACION">
-		<id name="ubicacion_id" type="java.lang.Integer">
+		<id name="ubicacionId" type="java.lang.Integer">
 			<generator class="identity" />
 		</id>
 
 		<property name="nombre" type="string"></property>
         
-        <joined-subclass name="ar.edu.unq.epers.model.Ubicacion" table="UBICACION_VIRTUAL">
+        <subclass name="ar.edu.unq.epers.model.UbicacionVirtual" extends="ar.edu.unq.epers.model.Ubicacion" discriminator-value="UbicacionVirtual">
         	<key column="virtual_id" />
         	
         <bag name="ubicaciones" inverse="true" cascade="save-update">
@@ -18,7 +18,7 @@
         	<one-to-many class="ar.edu.unq.epers.model.Ubicacion" />
         </bag>
         	
-        </joined-subclass>
+        </subclass>
 
 	</class>
 </hibernate-mapping>

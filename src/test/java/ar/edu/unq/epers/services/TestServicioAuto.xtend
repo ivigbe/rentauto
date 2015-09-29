@@ -8,10 +8,13 @@ import org.junit.Test
 import static org.junit.Assert.*
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Ubicacion
+import ar.edu.unq.epers.model.Turismo
 
 class TestServicioAuto {
 	
-	GenericHome<Auto> home
+	GenericHome<Auto> homeAuto
+	GenericHome<Categoria> homeCat
+	GenericHome<Ubicacion> homeUbi
 	ServicioAuto s
 	Categoria c
 	Ubicacion uInicial
@@ -19,8 +22,12 @@ class TestServicioAuto {
 	@Before
 	def void setUp()
 	{
-		home = HomeProvider.autoHome
-		s = new ServicioAuto(home)
+		homeAuto = HomeProvider.autoHome
+		homeCat = HomeProvider.categoriaHome
+		homeUbi = HomeProvider.ubicacionHome
+		c = new Turismo()
+		uInicial = new Ubicacion("Retiro")
+		s = new ServicioAuto(homeAuto, homeCat, homeUbi)
 		s.crearAuto("Ford", "Focus", 2010, "xls500", c, 15000.0, uInicial, 1)
 	}
 	

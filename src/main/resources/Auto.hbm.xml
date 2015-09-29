@@ -20,7 +20,7 @@
 		
 		
 
-		<one-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
+		<many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
 		column="categoriaId" not-null="true" cascade="save-update" />
 		
 		<!--
@@ -30,9 +30,9 @@
         	<one-to-many class="ar.edu.unq.epers.model.Reserva" />
         </bag>
         
-        <one-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
-			column="ubicacion_id" not-null="true" cascade="save-update" />
-
-		-->
+        -->
+        
+        <many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
+			column="ubicacionId" not-null="true" cascade="save-update" />
 	</class>
 </hibernate-mapping>
