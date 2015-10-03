@@ -21,6 +21,6 @@ class TestHomeAuto {
 		when(c.nombre).thenReturn("Familiar")
 		u = mock(Ubicacion)
 		when(u.nombre).thenReturn("Retiro")
-		a = new Auto("Kia", "H5", 2009, "xls550", c, 15000.0, u ,1)
+		//a = new Auto("Kia", "H5", 2009, "xls550", c, 15000.0, u ,1)
 	}
 }

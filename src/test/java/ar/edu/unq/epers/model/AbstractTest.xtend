@@ -17,7 +17,7 @@ class AbstractTest {
 		categoriaFamiliar = new Familiar
 		retiro = new Ubicacion("Retiro")
 		aeroparque = new Ubicacion("Aeroparque")
-		auto = new Auto("Peugeot", "505", 1990, "XXX123", categoriaFamiliar, 100D, retiro, 1)
+//		auto = new Auto("Peugeot", "505", 1990, "XXX123", categoriaFamiliar, 100D, retiro, 1)
 
 		usuarioPrueba = mock(IUsuario)
 		usuarioEmpresa = mock(IUsuario)
