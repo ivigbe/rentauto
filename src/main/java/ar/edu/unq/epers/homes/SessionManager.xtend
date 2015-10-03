@@ -20,6 +20,13 @@ class SessionManager {
 		sessionFactory;
 	}
 	
+	def synchronized static resetSessionFactory() {
+        if (sessionFactory != null) {
+            sessionFactory.close();
+            sessionFactory = null;
+        }
+    }
+	
 	
 	def static void  runInSession(Runnable  cmd){
 		runInSession[|

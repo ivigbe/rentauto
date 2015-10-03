@@ -16,4 +16,5 @@ class Ubicacion {
 @Accessors 
 class UbicacionVirtual extends Ubicacion{
 	List<Ubicacion> ubicaciones
+	
 }

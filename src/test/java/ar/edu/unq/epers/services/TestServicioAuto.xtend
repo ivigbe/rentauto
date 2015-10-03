@@ -10,12 +10,12 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.After
+import ar.edu.unq.epers.homes.SessionManager
 
 class TestServicioAuto {
 
 	GenericHome<Auto> home
-	GenericHome<Categoria> home2
-	GenericHome<Ubicacion> home3
 	ServicioAuto s
 	Categoria c = new Turismo
 	Ubicacion uInicial = new Ubicacion("Capital")
@@ -24,9 +24,7 @@ class TestServicioAuto {
 	@Before
 	def void setUp() {
 		home = HomeProvider.autoHome
-		home2 = HomeProvider.categoria
-		home3 = HomeProvider.ubicacion
-		auto = new Auto("Ford", "Focus", 2010, "xls500",c , 15000.0, uInicial)
+		auto = new Auto("Ford", "Focus", 2010, "xls500", c, 15000.0, uInicial)
 		s = new ServicioAuto(home)
 
 		s.crearAuto(auto)
@@ -34,6 +32,11 @@ class TestServicioAuto {
 
 	@Test
 	def void testCrearAuto() {
-		assertEquals(s.getAutoPorId(auto.autoId),  auto)
+		assertEquals(s.getAutoPorId(auto.autoId), auto)
+	}
+
+	@After
+	def void limpiar() {
+		SessionManager::resetSessionFactory()
 	}
 }
