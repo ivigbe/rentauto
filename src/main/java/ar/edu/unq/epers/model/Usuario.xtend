@@ -36,7 +36,7 @@ class Usuario implements IUsuario{
 		return this.reservas
 	}
 	
-	def autosDisponibles(Ubicacion ubi, Date dia)
+	def autosDisponibles(Ubicacion u, Date dia)
 	{
 		
 	}

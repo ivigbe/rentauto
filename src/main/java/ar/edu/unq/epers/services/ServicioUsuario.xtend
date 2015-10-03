@@ -1,16 +1,15 @@
 package ar.edu.unq.epers.services
 
-import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.epers.model.Usuario
+import ar.edu.unq.epers.exceptions.PasswordInvalidoException
 import ar.edu.unq.epers.exceptions.UsuarioNoExisteException
 import ar.edu.unq.epers.exceptions.UsuarioYaExisteException
 import ar.edu.unq.epers.exceptions.ValidacionException
-import ar.edu.unq.epers.exceptions.PasswordInvalidoException
 import ar.edu.unq.epers.homes.HomeUsuario
+import ar.edu.unq.epers.homes.SessionManager
 import ar.edu.unq.epers.mailing.EnviadorDeMails
 import ar.edu.unq.epers.mailing.Mail
-import org.hibernate.Session.LockRequest
-import ar.edu.unq.epers.homes.SessionManager
+import ar.edu.unq.epers.model.Usuario
+import org.eclipse.xtend.lib.annotations.Accessors
 
 //import java.util.Random
 @Accessors
@@ -98,6 +97,8 @@ class ServicioUsuario {
 
 		this.home.actualizar(usuario)
 	}
+	
+	/////////////////////////////////////////////////////////////////////////////////////////
 	
 	def void guardarUsuario(Usuario u)
 	{
