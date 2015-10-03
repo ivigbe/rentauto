@@ -10,11 +10,21 @@ class Empresa {
 	
 	List<IUsuario> usuarios = newArrayList
 	List<Reserva> reservas = newArrayList
-
+	
 	int cantidadMaximaDeReservasActivas
 	Double valorMaximoPorDia
 	List<Categoria> categoriasAdmitidas = newArrayList
+	Integer empresaId
 	
+	new(){}
+
+	new(String cuit, String nombreEmpresa, Double valor, int cant){
+		this.cuit = cuit
+		this.nombreEmpresa = nombreEmpresa
+		this.valorMaximoPorDia = valor
+		this.cantidadMaximaDeReservasActivas = cant
+	}
+
 	def agregarReserva(Reserva unaReserva){
 		unaReserva.validarReserva
 		reservas.add(unaReserva)

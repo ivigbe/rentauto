@@ -13,7 +13,7 @@ class ServicioEmpresa {
 		this.home = h
 	}
 	
-	def void crearEmpresa(Empresa e)
+	def void guardarEmpresa(Empresa e)
 	{
 		SessionManager.runInSession[|
 			

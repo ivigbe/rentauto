@@ -20,10 +20,10 @@ class TestServicioReserva {
 	GenericHome<Reserva> home
 	ServicioReserva s
 	Reserva r
-	Ubicacion origen
-	Ubicacion destino
-	Date inicio
-	Date fin
+	Ubicacion uOrigen
+	Ubicacion uDestino
+	Date ini
+	Date fechaFin
 	Auto a
 	IUsuario i
 	Categoria c
@@ -32,34 +32,35 @@ class TestServicioReserva {
 	def void setUp() {
 		home = HomeProvider.reservaHome
 		
-		origen = new Ubicacion("Quilmes")
-		destino = new Ubicacion("Puerto Madero")
-		inicio = new Date()
-		fin = new Date()
+		uOrigen = new Ubicacion("Quilmes")
+		uDestino = new Ubicacion("Puerto Madero")
+		ini = new Date()
+		fechaFin = new Date()
 		c = new Deportivo()
-		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, origen)
+		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, uOrigen)
 		
-		r = new Reserva()
-		r.numeroSolicitud = 1
-		r.origen = origen
-		r.destino = destino
-		r.inicio = inicio
-		r.fin = fin
-		r.auto = a
-		r.usuario = i
+		r = new Reserva(1,uOrigen,uDestino,ini,fechaFin,a,i)
+			
+		
+		a.agregarReserva(r)
 		
 		s = new ServicioReserva(home)
 		
-		s.crearReserva(r)
+		s.guardarReserva(r)
 	}
 
 	@Test
-	def void testCrearReserva() {
-		assertEquals(s.getReservaPorId(r.reservaId), r)
+	def void testGuardarReserva() {
+	//assertEquals(s.getReservaPorId(r.reservaId), r)
+	
+	val res = s.getReservaPorId(r.reservaId)
+	assertTrue(res.reservaId == r.reservaId)
 	}
 	
 	@After
 	def void limpiar() {
 		SessionManager::resetSessionFactory()
-	}
+ 
+ }
+
 }

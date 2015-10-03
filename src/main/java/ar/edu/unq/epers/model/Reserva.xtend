@@ -17,6 +17,20 @@ class Reserva {
 	IUsuario usuario
 	Integer reservaId
 
+	new(){}
+	
+	new (Integer numeroSoli,Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF,Auto au, IUsuario user){
+		
+		this.numeroSolicitud = numeroSoli
+		this.origen = ori
+		this.inicio = fechaI
+		this.fin = fechaF
+		this.auto = au
+		this.usuario = user
+		
+		
+	}
+	
 	def costo() {
 		val cantidadDeDias = Days.daysBetween(new DateTime(inicio), new DateTime(fin)).days
 		return cantidadDeDias * auto.costoTotal;
