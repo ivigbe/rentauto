@@ -4,29 +4,28 @@
 
 <hibernate-mapping>
 	<class name="ar.edu.unq.epers.model.Reserva" table="RESERVA">
-		<id name="reserva_id" type="java.lang.Integer">
+		<id name="reservaId" type="java.lang.Integer">
 			<generator class="identity" />
 		</id>
 
 		<property name="numeroSolicitud" type="int"></property>
-		
-        <one-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacion_id" not-null="true" cascade="save-update" />
+		<!-- VER LO DE UBICACION
+        <many-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdOrigen" not-null="true" cascade="save-update" />
         
-        <one-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacion_id" not-null="true" cascade="save-update" />
+        <many-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdDestino" not-null="true" cascade="save-update" />
+         -->
         
         <property name="inicio" type="date"></property>
         
         <property name="fin" type="date"></property>
         
-        <!--  
+        <many-to-one name="auto" class="ar.edu.unq.epers.model.Auto" column="autoId" not-null="true" cascade="save-update" />
+        <!--
+        <one-to-one name="usuario" class="ar.edu.unq.epers.model.IUsuario" column="iUsuarioId" not-null="true" cascade="save-update" />
         
-        <one-to-one name="auto" class="ar.edu.unq.epers.model.Auto" column="auto_id" not-null="true" cascade="save-update" />
-        
-        <one-to-one name="usuario" class="ar.edu.unq.epers.model.IUsuario" column="iusuario_id" not-null="true" cascade="save-update" />
-        
-        <joined-subclass name="ar.edu.unq.epers.model.Reserva" table="RESERVA_EMPRESARIAL">
-        	<key column="empresarial_id" />
-        </joined-subclass>
+        <subclass name="ar.edu.unq.epers.model.ReservaEmpresarial" table="RESERVA_EMPRESARIAL">
+        	<key column="empresarialId" />
+        </subclass>
         
         -->
 

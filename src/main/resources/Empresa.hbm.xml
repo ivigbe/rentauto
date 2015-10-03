@@ -8,27 +8,31 @@
 			<generator class="identity" />
 		</id>
 
-		<property name="cuit" type="string"></property>
+		<property name="cuit" type="string"/>
 
-		<property name="nombreEmpresa" type="string"></property>
+		<property name="nombreEmpresa" type="string"/>
 
-		<property name="cantidadMaximaDeReservasActivas" type="int"></property>
+		<property name="cantidadMaximaDeReservasActivas" type="int"/>
 		
-		<property name="valorMaximoPorDia" type="double"></property>
+		<property name="valorMaximoPorDia" type="double"/>
+		
+		<!--
 		
 		<bag name="usuarios" inverse="true" cascade="save-update">
         	<key column="iusuario_id" />
-        	<one-to-many class="ar.edu.unq.epers.model.IUsuario" />
+        	<many-to-many class="ar.edu.unq.epers.model.IUsuario" />
         </bag>
         
+         -->
+        
         <bag name="reservas" inverse="true" cascade="save-update">
-        	<key column="reserva_id" />
-        	<one-to-many class="ar.edu.unq.epers.model.Reserva" />
+        	<key column="reservaId" />
+        	<many-to-many class="ar.edu.unq.epers.model.Reserva" />
         </bag>
         
         <bag name="categoriasAdmitidas" inverse="true" cascade="save-update">
-        	<key column="categoria_id" />
-        	<one-to-many class="ar.edu.unq.epers.model.Categoria" />
+        	<key column="categoriaId" />
+        	<many-to-many class="ar.edu.unq.epers.model.Categoria" />
         </bag>
 
 	</class>

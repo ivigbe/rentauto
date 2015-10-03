@@ -17,20 +17,19 @@
 		<property name="patente" type="string"></property>
 
 		<property name="costoBase" type="double"></property>
-		
-		
+
+
 
 		<many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
-		column="categoriaId" not-null="true" cascade="save-update" />
-		
-		<!--
-		
+			column="categoriaId" not-null="true" cascade="save-update" />
+
 		<bag name="reservas" inverse="true" cascade="save-update">
-        	<key column="reserva_id" />
-        	<one-to-many class="ar.edu.unq.epers.model.Reserva" />
-        </bag>
-        -->
-        <many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
-			column="ubicacion_id" not-null="true" cascade="save-update" />
+			<key column="reservaId" />
+			<one-to-many class="ar.edu.unq.epers.model.Reserva" />
+		</bag>
+		<!--
+		<many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
+			column="ubicacionId" not-null="true" cascade="save-update" />
+		 -->
 	</class>
 </hibernate-mapping>

@@ -3,18 +3,33 @@ package ar.edu.unq.epers.homes
 import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Ubicacion
+import ar.edu.unq.epers.model.Empresa
+import ar.edu.unq.epers.model.IUsuario
+import ar.edu.unq.epers.model.Reserva
 
 class HomeProvider {
 
 	def static getAutoHome() {
 		new GenericHome(Auto)
 	}
-	
-	def static getCategoria() {
+
+	def static getCategoriaHome() {
 		new GenericHome(Categoria)
 	}
 
-	def static getUbicacion() {
+	def static getUbicacionHome() {
 		new GenericHome(Ubicacion)
+	}
+
+	def static getEmpresaHome() {
+		new GenericHome(Empresa)
+	}
+
+	def static getIUsuarioHome() {
+		new GenericHome(IUsuario)
+	}
+
+	def static getReservaHome() {
+		new GenericHome(Reserva)
 	}
 }

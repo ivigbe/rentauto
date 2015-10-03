@@ -9,16 +9,18 @@
 		</id>
 
 		<property name="nombre" type="string"></property>
-        
-        <subclass name="ar.edu.unq.epers.model.UbicacionVirtual" extends="ar.edu.unq.epers.model.Ubicacion" discriminator-value="UbicacionVirtual">
-        	<key column="virtual_id" />
-        	
-        <bag name="ubicaciones" inverse="true" cascade="save-update">
-        	<key column="ubicacion_id" />
-        	<one-to-many class="ar.edu.unq.epers.model.Ubicacion" />
-        </bag>
-        	
-        </subclass>
-
+		
+		<joined-subclass name="ar.edu.unq.epers.model.UbicacionVirtual"
+			table="UbicacionVirtual">
+			
+			<key column="virtualId"></key>
+			
+			<bag name="ubicaciones" inverse="true" cascade="save-update">
+				<key column="ubicacionId" />
+				<many-to-many class="ar.edu.unq.epers.model.Ubicacion" />
+			</bag>
+			
+		</joined-subclass>
+		
 	</class>
 </hibernate-mapping>
