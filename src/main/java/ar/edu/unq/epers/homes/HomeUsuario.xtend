@@ -6,11 +6,15 @@ import java.sql.DriverManager
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 
-class HomeUsuario {
+class HomeUsuario<T> extends GenericHome<T>{
 
 	Connection c
 	PreparedStatement ps
 	ResultSet rs
+	
+	new(Class entityType) {
+		super(entityType)
+	}
 
 	/**
 	 * Genera una conexion a la base de datos.
@@ -250,5 +254,6 @@ class HomeUsuario {
 			}
 		}
 	}
+	
 }
 

@@ -12,7 +12,7 @@ class ServicioAuto {
 		home = h
 	}
 
-	def void crearAuto(Auto auto) {
+	def void guardarAuto(Auto auto) {
 		SessionManager.runInSession([
 			home.save(auto)
 		])

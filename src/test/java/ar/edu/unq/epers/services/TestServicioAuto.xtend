@@ -27,7 +27,7 @@ class TestServicioAuto {
 		auto = new Auto("Ford", "Focus", 2010, "xls500", c, 15000.0, uInicial)
 		s = new ServicioAuto(home)
 
-		s.crearAuto(auto)
+		s.guardarAuto(auto)
 	}
 
 	@Test

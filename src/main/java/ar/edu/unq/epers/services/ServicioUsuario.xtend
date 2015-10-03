@@ -9,6 +9,8 @@ import ar.edu.unq.epers.exceptions.PasswordInvalidoException
 import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.mailing.EnviadorDeMails
 import ar.edu.unq.epers.mailing.Mail
+import org.hibernate.Session.LockRequest
+import ar.edu.unq.epers.homes.SessionManager
 
 //import java.util.Random
 @Accessors
@@ -95,5 +97,19 @@ class ServicioUsuario {
 		usuario.updatePassword(newPassword)
 
 		this.home.actualizar(usuario)
+	}
+	
+	def void guardarUsuario(Usuario u)
+	{
+		SessionManager.runInSession[|
+			
+			this.home.save(u)
+		]
+	}
+	
+	def getUsuarioPorId(int id){
+		SessionManager.runInSession[|
+			this.home.get(id)
+		]		
 	}
 }

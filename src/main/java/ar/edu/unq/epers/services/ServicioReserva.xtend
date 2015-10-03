@@ -12,7 +12,7 @@ class ServicioReserva {
 		home = h
 	}
 	
-	def void crearReserva(Reserva r) {
+	def void guardarReserva(Reserva r) {
 		SessionManager.runInSession([
 			home.save(r)
 		])
@@ -20,8 +20,7 @@ class ServicioReserva {
 	
 	def getReservaPorId(int id)
 	{
-		SessionManager.runInSession[|
-			
+		SessionManager.runInSession[
 			home.get(id)
 		]
 	}
