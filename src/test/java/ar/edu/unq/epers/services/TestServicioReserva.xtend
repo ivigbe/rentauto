@@ -36,6 +36,7 @@ class TestServicioReserva {
 		uDestino = new Ubicacion("Puerto Madero")
 		ini = new Date()
 		fechaFin = new Date()
+		u = new Usuario()
 		c = new Deportivo()
 		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, uOrigen)
 
@@ -58,7 +59,6 @@ class TestServicioReserva {
 	@After
 	def void limpiar() {
 		SessionManager::resetSessionFactory()
-
 	}
 
 }

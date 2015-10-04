@@ -25,7 +25,7 @@ class HomeProvider {
 		new GenericHome(Empresa)
 	}
 
-	def static getIUsuarioHome() {
+	def static getUsuarioHome() {
 		new GenericHome(Usuario)
 	}
 

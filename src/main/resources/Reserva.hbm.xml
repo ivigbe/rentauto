@@ -24,10 +24,8 @@
         </subclass>
          -->
         <many-to-one name="auto" class="ar.edu.unq.epers.model.Auto" column="autoId" not-null="true" cascade="save-update" />
-        <!--
-        <one-to-one name="usuario" class="ar.edu.unq.epers.model.IUsuario" column="iUsuarioId" not-null="true" cascade="save-update" />
         
-        -->
+        <many-to-one name="usuario" class="ar.edu.unq.epers.model.Usuario" column="usuarioId" not-null="true" cascade="save-update" />
 
 	</class>
 </hibernate-mapping>
