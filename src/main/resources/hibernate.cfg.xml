@@ -18,11 +18,11 @@
         <mapping resource="Categoria.hbm.xml" />
         <mapping resource="Empresa.hbm.xml" />
         <!--
-        <mapping resource="IUsuario.hbm.xml" />
-        -->
+        <mapping resource="Usuario.hbm.xml" />
+		 -->
         <mapping resource="Reserva.hbm.xml" />
-        
+        <!--
         <mapping resource="Ubicacion.hbm.xml" />
-        
+		-->        
     </session-factory>
 </hibernate-configuration>

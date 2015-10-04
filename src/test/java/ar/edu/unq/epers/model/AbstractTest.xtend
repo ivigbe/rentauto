@@ -8,8 +8,8 @@ class AbstractTest {
 	protected Categoria categoriaFamiliar
 	protected Ubicacion retiro
 	protected Ubicacion aeroparque
-	protected IUsuario usuarioPrueba
-	protected IUsuario usuarioEmpresa
+	protected Usuario usuarioPrueba
+	protected Usuario usuarioEmpresa
 	protected Empresa empresa
 
 	@Before
@@ -19,8 +19,8 @@ class AbstractTest {
 		aeroparque = new Ubicacion("Aeroparque")
 		auto = new Auto("Peugeot", "505", 1990, "XXX123", categoriaFamiliar, 100D, retiro)
 
-		usuarioPrueba = mock(IUsuario)
-		usuarioEmpresa = mock(IUsuario)
+		usuarioPrueba = mock(Usuario)
+		usuarioEmpresa = mock(Usuario)
 		
 		empresa = new Empresa => [
 			cuit = "30-11223344-90"

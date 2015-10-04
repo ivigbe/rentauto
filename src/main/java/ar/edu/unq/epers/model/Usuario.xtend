@@ -5,7 +5,7 @@ import java.sql.Date
 import java.util.List
 
 @Accessors
-class Usuario implements IUsuario{
+class Usuario {
 
 	String nombre
 	String apellido
@@ -28,17 +28,12 @@ class Usuario implements IUsuario{
 		this.password = newPass
 	}
 	
-	override agregarReserva(Reserva unaReserva) {
+	def agregarReserva(Reserva unaReserva) {
 		this.reservas.add(unaReserva)
 	}
 	
-	override getReservas() {
+	def getReservas() {
 		return this.reservas
-	}
-	
-	def autosDisponibles(Ubicacion u, Date dia)
-	{
-		
 	}
 
 }

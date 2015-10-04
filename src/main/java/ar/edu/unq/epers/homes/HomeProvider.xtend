@@ -4,7 +4,7 @@ import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Ubicacion
 import ar.edu.unq.epers.model.Empresa
-import ar.edu.unq.epers.model.IUsuario
+import ar.edu.unq.epers.model.Usuario
 import ar.edu.unq.epers.model.Reserva
 
 class HomeProvider {
@@ -26,7 +26,7 @@ class HomeProvider {
 	}
 
 	def static getIUsuarioHome() {
-		new GenericHome(IUsuario)
+		new GenericHome(Usuario)
 	}
 
 	def static getReservaHome() {
