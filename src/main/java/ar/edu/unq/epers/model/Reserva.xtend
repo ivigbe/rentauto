@@ -17,75 +17,74 @@ class Reserva {
 	IUsuario usuario
 	Integer reservaId
 
-	new(){}
-	
-	new (Integer numeroSoli,Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF,Auto au, IUsuario user){
-		
+	new() {
+	}
+
+	new(Integer numeroSoli, Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF, Auto au, IUsuario user) {
+
 		this.numeroSolicitud = numeroSoli
 		this.origen = ori
 		this.inicio = fechaI
 		this.fin = fechaF
 		this.auto = au
 		this.usuario = user
-		
-		
+
 	}
-	
+
 	def costo() {
 		val cantidadDeDias = Days.daysBetween(new DateTime(inicio), new DateTime(fin)).days
 		return cantidadDeDias * auto.costoTotal;
 	}
-	
-	def void validar(){
+
+	def void validar() {
 		val ubicacionInicial = auto.ubicacionParaDia(inicio)
-		
-		if(ubicacionInicial != origen)
+
+		if (ubicacionInicial != origen)
 			throw new ReservaException("El auto no tiene la ubicación de origen buscada")
-		
-		if(!auto.estaLibre(inicio, fin))
+
+		if (!auto.estaLibre(inicio, fin))
 			throw new ReservaException("El auto no esta libre en el periodo pedido")
 	}
-	
-	def isActiva(){
+
+	def isActiva() {
 		inicio <= hoy && hoy <= fin
 	}
-	
-	def seSuperpone(Date desde, Date hasta){
-		if(inicio <= desde && desde <= fin )
+
+	def seSuperpone(Date desde, Date hasta) {
+		if (inicio <= desde && desde <= fin)
 			return true
-		if(inicio <= hasta && hasta <= fin )
+		if (inicio <= hasta && hasta <= fin)
 			return true
-		if(desde <= inicio && fin <= hasta)
+		if (desde <= inicio && fin <= hasta)
 			return true
-			
-		return false	
+
+		return false
 	}
-	
-	def costoPorDia(){
+
+	def costoPorDia() {
 		return 0
 	}
-	
-	def reservar(){
+
+	def reservar() {
 		this.auto.agregarReserva(this)
 		this.usuario.agregarReserva(this)
 	}
 }
 
-
-@Accessors 
-class ReservaEmpresarial extends Reserva{
+@Accessors
+class ReservaEmpresarial extends Reserva {
 	Empresa empresa
 	String nombreContacto
 	String cargoContacto
-	
-	override reservar(){
+
+	override reservar() {
 		super.reservar()
 		this.empresa.agregarReserva(this)
 	}
 }
 
-class ReservaException extends RuntimeException{
-	new(String msg){
+class ReservaException extends RuntimeException {
+	new(String msg) {
 		super(msg)
 	}
 }
