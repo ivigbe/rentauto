@@ -8,7 +8,7 @@ class Empresa {
 	String cuit
 	String nombreEmpresa
 
-	List<IUsuario> usuarios = newArrayList
+	List<Usuario> usuarios = newArrayList
 	List<Reserva> reservas = newArrayList
 
 	int cantidadMaximaDeReservasActivas

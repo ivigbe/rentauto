@@ -14,13 +14,13 @@ class Reserva {
 	Date inicio
 	Date fin
 	Auto auto
-	IUsuario usuario
+	Usuario usuario
 	Integer reservaId
 
 	new() {
 	}
 
-	new(Integer numeroSoli, Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF, Auto au, IUsuario user) {
+	new(Integer numeroSoli, Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF, Auto au, Usuario user) {
 
 		this.numeroSolicitud = numeroSoli
 		this.origen = ori
@@ -69,6 +69,7 @@ class Reserva {
 		this.auto.agregarReserva(this)
 		this.usuario.agregarReserva(this)
 	}
+	
 }
 
 @Accessors

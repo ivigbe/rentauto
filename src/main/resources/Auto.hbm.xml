@@ -27,8 +27,9 @@
 			<key column="reservaId" />
 			<one-to-many class="ar.edu.unq.epers.model.Reserva" />
 		</bag>
-		
+		<!--
 		<many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
 			column="ubicacionId" not-null="true" cascade="save-update" />
+		 -->
 	</class>
 </hibernate-mapping>

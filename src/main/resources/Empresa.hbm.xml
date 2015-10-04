@@ -16,14 +16,10 @@
 		
 		<property name="valorMaximoPorDia" type="double"/>
 		
-		<!--
-		
 		<bag name="usuarios" inverse="true" cascade="save-update">
-        	<key column="iusuario_id" />
-        	<many-to-many class="ar.edu.unq.epers.model.IUsuario" />
+        	<key column="usuario_id" />
+        	<many-to-many class="ar.edu.unq.epers.model.Usuario" />
         </bag>
-        
-         -->
         
         <bag name="reservas" inverse="true" cascade="save-update">
         	<key column="reservaId" />

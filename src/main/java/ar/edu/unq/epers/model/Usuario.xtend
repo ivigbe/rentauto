@@ -1,11 +1,11 @@
 package ar.edu.unq.epers.model
 
 import org.eclipse.xtend.lib.annotations.Accessors
-import java.sql.Date
+import java.util.Date
 import java.util.List
 
 @Accessors
-class Usuario implements IUsuario{
+class Usuario {
 
 	String nombre
 	String apellido
@@ -15,7 +15,19 @@ class Usuario implements IUsuario{
 	String password
 	Boolean validado
 	List<Reserva> reservas
-	Integer usuarioId 
+	Integer usuarioId
+	
+	new(){}
+	
+	new(String name, String apell, String nameUser, String pass, String email, Date fechaNacimiento)
+	{
+		this.nombre = name
+		this.apellido = apell
+		this.nombreUsuario = nameUser
+		this.password = pass
+		this.email = email
+		this.fechaNacimiento = fechaNacimiento
+	}
 
 	def validar() {
 		this.validado = true
@@ -28,17 +40,12 @@ class Usuario implements IUsuario{
 		this.password = newPass
 	}
 	
-	override agregarReserva(Reserva unaReserva) {
+	def agregarReserva(Reserva unaReserva) {
 		this.reservas.add(unaReserva)
 	}
 	
-	override getReservas() {
+	def getReservas() {
 		return this.reservas
-	}
-	
-	def autosDisponibles(Ubicacion u, Date dia)
-	{
-		
 	}
 
 }
