@@ -9,23 +9,24 @@
 		</id>
 
 		<property name="numeroSolicitud" type="int"></property>
-		<!-- VER LO DE UBICACION
-        <many-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdOrigen" not-null="true" cascade="save-update" />
-        
-        <many-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdDestino" not-null="true" cascade="save-update" />
-         -->
-        
+		
         <property name="inicio" type="date"></property>
         
         <property name="fin" type="date"></property>
-        <!--
-        <discriminator column="tipoReserva"/>
-        <subclass name="ar.edu.unq.epers.model.ReservaEmpresarial" extends="Reserva" discriminator-value="ReservaEmpresarial">
-        </subclass>
-         -->
+		
+        <many-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdOrigen" not-null="true" cascade="save-update" />
+        
+        <many-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" column="ubicacionIdDestino" not-null="true" cascade="save-update" />
+        
         <many-to-one name="auto" class="ar.edu.unq.epers.model.Auto" column="autoId" not-null="true" cascade="save-update" />
         
         <many-to-one name="usuario" class="ar.edu.unq.epers.model.Usuario" column="usuarioId" not-null="true" cascade="save-update" />
 
+        <joined-subclass name="ar.edu.unq.epers.model.ReservaEmpresarial" table="RESERVA_EMPRESARIAL">
+        
+        	<key column="empresarialId"/>
+        	
+        </joined-subclass>
+        
 	</class>
 </hibernate-mapping>

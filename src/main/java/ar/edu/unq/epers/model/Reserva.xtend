@@ -24,6 +24,7 @@ class Reserva {
 
 		this.numeroSolicitud = numeroSoli
 		this.origen = ori
+		this.destino = des
 		this.inicio = fechaI
 		this.fin = fechaF
 		this.auto = au
