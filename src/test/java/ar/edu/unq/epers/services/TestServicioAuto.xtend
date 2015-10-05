@@ -34,16 +34,15 @@ class TestServicioAuto {
 	def void testGuardarAuto() {
 		assertTrue(s.getAutoPorId(auto.autoId) == auto)
 	}
-	
+
 	@Test
-	def void testObtengoAutosPorUbicacion()
-	{
+	def void testObtengoAutosPorUbicacion() {
 		val autosPorUbicacion = s.autosPorUbicacion(uInicial)
 		assertTrue(autosPorUbicacion.size() == 1)
 	}
-	
-	@Test def void testObtengoAutosPorCategoria()
-	{
+
+	@Test
+	def void testObtengoAutosPorCategoria() {
 		val autosPorCategoria = s.autosPorCategoria(c)
 		assertTrue(autosPorCategoria.size() == 1)
 	}

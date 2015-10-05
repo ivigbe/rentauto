@@ -8,6 +8,8 @@ class Ubicacion {
 	String nombre
 	Integer ubicacionId
 	
+	new(){}
+	
 	new(String nombre){
 		this.nombre = nombre
 	}
