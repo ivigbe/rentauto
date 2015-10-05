@@ -10,7 +10,7 @@ import ar.edu.unq.epers.model.Reserva
 class HomeProvider {
 
 	def static getAutoHome() {
-		new GenericHome(Auto)
+		new HomeAuto(Auto)
 	}
 
 	def static getCategoriaHome() {

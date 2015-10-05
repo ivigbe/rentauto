@@ -26,7 +26,7 @@
 		<many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
 			column="ubicacionId" not-null="true" cascade="save-update" />
 		
-		<bag name="reservas" inverse="true" cascade="save-update">
+		<bag name="reservas" inverse="true" cascade="all">
 			<key column="reservaId" />
 			<one-to-many class="ar.edu.unq.epers.model.Reserva" />
 		</bag>
