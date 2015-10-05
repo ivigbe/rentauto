@@ -1,14 +1,14 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.GenericHome
-import ar.edu.unq.epers.model.Reserva
+import ar.edu.unq.epers.homes.HomeReserva
 import ar.edu.unq.epers.homes.SessionManager
+import ar.edu.unq.epers.model.Reserva
 
 class ServicioReserva {
 	
-	GenericHome<Reserva> home
+	HomeReserva home
 	
-	new(GenericHome<Reserva> h) {
+	new(HomeReserva h) {
 		home = h
 	}
 	
@@ -33,4 +33,5 @@ class ServicioReserva {
 			home.save(r)
 		]
 	}
+	
 }

@@ -25,6 +25,7 @@ class TestServicioReserva {
 	Date ini
 	Date fechaFin
 	Auto a
+	Auto a2
 	Usuario u
 	Categoria c
 
@@ -39,6 +40,7 @@ class TestServicioReserva {
 		u = new Usuario()
 		c = new Deportivo()
 		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, uOrigen)
+		a2 = new Auto("Ford", "Focus", 2010, "aaa111", c, 130000.0, uDestino)
 
 		r = new Reserva(1, uOrigen, uDestino, ini, fechaFin, a, u)
 
