@@ -2,9 +2,10 @@ package ar.edu.unq.epers.model
 
 import java.util.Date
 import org.eclipse.xtend.lib.annotations.Accessors
-import static ar.edu.unq.epers.extensions.DateExtensions.*
 import org.joda.time.DateTime
 import org.joda.time.Days
+
+import static ar.edu.unq.epers.extensions.DateExtensions.*
 
 @Accessors
 class Reserva {
@@ -65,6 +66,7 @@ class Reserva {
 	def costoPorDia() {
 		return 0
 	}
+
 
 	def reservar() {
 		this.auto.agregarReserva(this)

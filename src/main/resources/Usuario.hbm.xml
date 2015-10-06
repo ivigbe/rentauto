@@ -22,7 +22,7 @@
 		
 		<property name= "validado" type = "boolean"></property>
 		
-		<bag name="reservas" inverse="true" cascade="save-update">
+		<bag name="reservas" inverse="true" cascade="save-update" lazy="true">
         	<key column="reservaId" />
         	<many-to-many class="ar.edu.unq.epers.model.Reserva" />
         </bag>

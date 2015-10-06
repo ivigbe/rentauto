@@ -1,23 +1,23 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.GenericHome
-import ar.edu.unq.epers.model.Reserva
-import org.junit.Before
-import static org.junit.Assert.*
-import ar.edu.unq.epers.homes.HomeProvider
-import org.junit.Test
-import ar.edu.unq.epers.model.Ubicacion
-import java.util.Date
+import ar.edu.unq.epers.homes.HomeReserva
+import ar.edu.unq.epers.homes.SessionManager
 import ar.edu.unq.epers.model.Auto
-import ar.edu.unq.epers.model.Usuario
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Deportivo
+import ar.edu.unq.epers.model.Reserva
+import ar.edu.unq.epers.model.Ubicacion
+import ar.edu.unq.epers.model.Usuario
+import java.util.Date
 import org.junit.After
-import ar.edu.unq.epers.homes.SessionManager
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class TestServicioReserva {
 
-	GenericHome<Reserva> home
+	HomeReserva home
 	ServicioReserva s
 	Reserva r
 	Ubicacion uOrigen
@@ -25,13 +25,12 @@ class TestServicioReserva {
 	Date ini
 	Date fechaFin
 	Auto a
-	Auto a2
 	Usuario u
 	Categoria c
 
 	@Before
 	def void setUp() {
-		home = HomeProvider.reservaHome
+		home = new HomeReserva()
 
 		uOrigen = new Ubicacion("Quilmes")
 		uDestino = new Ubicacion("Puerto Madero")
@@ -40,15 +39,14 @@ class TestServicioReserva {
 		u = new Usuario()
 		c = new Deportivo()
 		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, uOrigen)
-		a2 = new Auto("Ford", "Focus", 2010, "aaa111", c, 130000.0, uDestino)
 
 		r = new Reserva(1, uOrigen, uDestino, ini, fechaFin, a, u)
 
-		a.agregarReserva(r)
-
 		s = new ServicioReserva(home)
-
+		
+	
 		s.guardarReserva(r)
+		s.hacerReserva(r)
 	}
 
 	@Test
@@ -57,6 +55,11 @@ class TestServicioReserva {
 		val res = s.getReservaPorId(r.reservaId)
 		assertTrue(res.reservaId == r.reservaId)
 	}
+	@Test
+	def void testHacerReserva() {
+		assertTrue(a.reservas.contains(r))
+	}
+
 
 	@After
 	def void limpiar() {

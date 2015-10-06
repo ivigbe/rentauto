@@ -1,14 +1,15 @@
 package ar.edu.unq.epers.homes
 
-import ar.edu.unq.epers.model.Ubicacion
-import java.util.List
+import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
+import ar.edu.unq.epers.model.Ubicacion
 import java.util.Date
+import java.util.List
 
-class HomeAuto<Auto> extends GenericHome<Auto>{
+class HomeAuto extends GenericHome<Auto>{
 	
-	new(Class<Auto> entityType) {
-		super(entityType)
+	new() {
+		super(Auto)
 	}
 	
 	def getAutosPorUbicacion(Ubicacion ubicacionOrigen) {
@@ -54,14 +55,15 @@ class HomeAuto<Auto> extends GenericHome<Auto>{
 	
 	def obtenerAutosPor(Ubicacion origen, Ubicacion destino, Date finicio, Date ffin, Categoria categoria) {
 		val query = SessionManager::session.createQuery("
-			from Auto as auto left join auto.reservas as reserva
-				where 
-					((reserva = null) or (:finicio > reserva.fin and :ffinal < reserva.inicio) or
-					(reserva != null) or (auto.ubicacionInicial = :origen) )
-					and auto.categoria = :categoria")
+			select auto from Auto as auto
+				left join fetch auto.reservas as reserva join fetch auto.ubicacionInicial
+			where 
+				(reserva is null and auto.ubicacionInicial = :origen) or
+				(reserva is not null and  (reserva.inicio >:inicio or reserva.fin < :final )) and 
+				auto.categoria = :categoria" )
 
-		query.setDate("finicio", finicio)
-		query.setDate("ffinal", ffin)
+		query.setDate("inicio", finicio)
+		query.setDate("final", ffin)
 		query.setEntity("origen", origen)
 		query.setEntity("categoria", categoria)
 		query.list as List<Auto>

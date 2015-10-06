@@ -9,9 +9,9 @@ import java.util.Date
 
 class ServicioAuto {
 
-	HomeAuto<Auto> home
+	HomeAuto home
 
-	new(HomeAuto<Auto> h) {
+	new(HomeAuto h) {
 		home = h
 	}
 
@@ -57,7 +57,9 @@ class ServicioAuto {
 	
 	def obtenerAutosPor(Ubicacion origen, Ubicacion destino, Date finicio, Date ffin, Categoria categoria) {
 		SessionManager.runInSession [|
-			home.obtenerAutosPor(origen, destino, finicio, ffin, categoria)
+			home.obtenerAutosPor(origen, destino, finicio, ffin, categoria).filter[
+				it.ubicacionParaDia(finicio) == origen
+			].toList
 		]
 	}
 	
