@@ -29,7 +29,7 @@ class SessionManager {
 	
 	
 	def static void  runInSession(Runnable  cmd){
-		runInSession[|
+		runInSession[
 			cmd.run
 			null
 		]		

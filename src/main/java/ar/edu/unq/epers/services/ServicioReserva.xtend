@@ -27,11 +27,8 @@ class ServicioReserva {
 	
 	def hacerReserva(Reserva r)
 	{
-		SessionManager.runInSession[|
-			
-		
+		SessionManager.runInSession[
 			r.reservar()
-			
 			home.save(r)
 		]
 	}

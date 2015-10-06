@@ -3,6 +3,7 @@ package ar.edu.unq.epers.model
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Date
 import java.util.List
+import java.util.ArrayList
 
 @Accessors
 class Usuario {
@@ -14,8 +15,9 @@ class Usuario {
 	Date fechaNacimiento
 	String password
 	Boolean validado
-	List<Reserva> reservas
+	List<Reserva> reservas  = newArrayList()
 	Integer usuarioId
+	
 	
 	new(){}
 	
@@ -27,6 +29,7 @@ class Usuario {
 		this.password = pass
 		this.email = email
 		this.fechaNacimiento = fechaNacimiento
+		this.reservas = new ArrayList <Reserva>()
 	}
 
 	def validar() {
