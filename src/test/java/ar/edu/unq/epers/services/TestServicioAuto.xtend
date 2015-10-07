@@ -53,7 +53,8 @@ class TestServicioAuto {
 	@Test
 	def void testObtengoAutosPorUbicacion() {
 		val autosPorUbicacion = serviceAuto.autosPorUbicacion(uInicial)
-		assertTrue(autosPorUbicacion.size == 1)
+		//assertTrue(autosPorUbicacion.size == 1)
+		assertEquals(autosPorUbicacion.size, 2)   
 	}
 
 	@Test
