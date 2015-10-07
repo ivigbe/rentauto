@@ -9,18 +9,18 @@ import static org.mockito.Mockito.*
 
 class TestHomeAuto {
 
-	Auto a
+	Auto auto
 	GenericHome<Auto> home
-	Categoria c
-	Ubicacion u
+	Categoria categoriaVehiculo
+	Ubicacion ubicacion
 
 	@Before
 	def void setUp() {
 		home = HomeProvider.autoHome
-		c = mock(Categoria)
-		when(c.nombre).thenReturn("Familiar")
-		u = mock(Ubicacion)
-		when(u.nombre).thenReturn("Retiro")
-		a = new Auto("Kia", "H5", 2009, "xls550", c, 15000.0, u)
+		categoriaVehiculo = mock(Categoria)
+		when(categoriaVehiculo.nombre).thenReturn("Familiar")
+		ubicacion = mock(Ubicacion)
+		when(ubicacion.nombre).thenReturn("Retiro")
+		auto = new Auto("Kia", "H5", 2009, "xls550", categoriaVehiculo, 15000.0, ubicacion)
 	}
 }

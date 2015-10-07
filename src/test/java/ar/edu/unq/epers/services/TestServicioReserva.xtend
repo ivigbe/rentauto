@@ -18,15 +18,15 @@ import static org.junit.Assert.*
 class TestServicioReserva {
 
 	HomeReserva home
-	ServicioReserva s
-	Reserva r
+	ServicioReserva serviceReserva
+	Reserva unaReserva
 	Ubicacion uOrigen
 	Ubicacion uDestino
-	Date ini
+	Date finicio
 	Date fechaFin
-	Auto a
-	Usuario u
-	Categoria c
+	Auto auto 
+	Usuario usuario
+	Categoria cateroriaVehiculo
 
 	@Before
 	def void setUp() {
@@ -34,30 +34,30 @@ class TestServicioReserva {
 
 		uOrigen = new Ubicacion("Quilmes")
 		uDestino = new Ubicacion("Puerto Madero")
-		ini = new Date()
+		finicio = new Date()
 		fechaFin = new Date()
-		u = new Usuario()
-		c = new Deportivo()
-		a = new Auto("Mazda", "RX", 2009, "xxx123", c, 120000.0, uOrigen)
+		usuario = new Usuario()
+		cateroriaVehiculo = new Deportivo()
+		auto = new Auto("Mazda", "RX", 2009, "xxx123", cateroriaVehiculo, 120000.0, uOrigen)
 
-		r = new Reserva(1, uOrigen, uDestino, ini, fechaFin, a, u)
+		unaReserva = new Reserva(1, uOrigen, uDestino, finicio, fechaFin, auto, usuario)
 
-		s = new ServicioReserva(home)
+		serviceReserva = new ServicioReserva(home)
 		
 	
-		s.guardarReserva(r)
-		s.hacerReserva(r)
+		serviceReserva.guardarReserva(unaReserva)
+		serviceReserva.hacerReserva(unaReserva)
 	}
 
 	@Test
 	def void testGuardarReserva() {
 
-		val res = s.getReservaPorId(r.reservaId)
-		assertTrue(res.reservaId == r.reservaId)
+		val res = serviceReserva.getReservaPorId(unaReserva.reservaId)
+		assertTrue(res.reservaId == unaReserva.reservaId)
 	}
 	@Test
 	def void testHacerReserva() {
-		assertTrue(a.reservas.contains(r))
+		assertTrue(auto.reservas.contains(unaReserva))
 	}
 
 

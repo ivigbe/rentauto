@@ -14,7 +14,7 @@ class HomeAuto extends GenericHome<Auto>{
 	
 	def getAutosPorUbicacion(Ubicacion ubicacionOrigen) {
 
-		val query = SessionManager::session.createQuery("from Auto as auto where auto.ubicacionInicial = :ubi")
+		val query = SessionManager::session.createQuery(" from Auto as auto where auto.ubicacionInicial = :ubi")
 		query.setEntity("ubi", ubicacionOrigen)
 		var autosPorUbicacion = query.list as List<Auto>
 

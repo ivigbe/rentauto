@@ -12,24 +12,24 @@ import ar.edu.unq.epers.homes.SessionManager
 class TestServicioUbicacion {
 	
 	GenericHome<Ubicacion> home
-	Ubicacion u
-	ServicioUbicacion s
+	Ubicacion ubicacion
+	ServicioUbicacion serviceHome
 	
 	@Before
 	def void setUp()
 	{
 		home = HomeProvider.ubicacionHome
-		u = new Ubicacion("Neuquen")
-		s = new ServicioUbicacion(home)
+		ubicacion = new Ubicacion("Neuquen")
+		serviceHome = new ServicioUbicacion(home)
 		
-		s.guardarUbicacion(u)
+		serviceHome.guardarUbicacion(ubicacion)
 	}
 	
 	@Test
 	def void testGuardoUnaUbicacion()
 	{
-		val res = s.getUbicacionPorId(u.ubicacionId)
-		assertTrue(res.ubicacionId == u.ubicacionId)
+		val res = serviceHome.getUbicacionPorId(ubicacion.ubicacionId)
+		assertTrue(res.ubicacionId == ubicacion.ubicacionId)
 	}
 	
 	@After
