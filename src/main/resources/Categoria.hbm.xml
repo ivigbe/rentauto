@@ -8,7 +8,7 @@
 			<generator class="identity" />
 		</id>
 		
-		<discriminator column="p"/>
+		<discriminator column="categoria"/>
 		<property name="nombre" type="string" ></property>
 		
 		<subclass name="ar.edu.unq.epers.model.Turismo" extends="Categoria" discriminator-value="Turismo"></subclass>
