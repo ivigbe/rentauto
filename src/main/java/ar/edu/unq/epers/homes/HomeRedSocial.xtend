@@ -8,13 +8,16 @@ import org.neo4j.graphdb.DynamicLabel
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.Node
 import org.neo4j.graphdb.RelationshipType
-
+import java.util.Calendar
+import java.util.Date
 class HomeRedSocial {
 	
 	GraphDatabaseService graph
 	ServicioUsuario serviceUsuario
+	Calendar calendar = Calendar.getInstance();
+	Date now = calendar.getTime();
 	
-	new(GraphDatabaseService graph) {
+	new(GraphDatabaseService graph){
 		this.graph = graph
 	}
 	
@@ -22,18 +25,37 @@ class HomeRedSocial {
 		DynamicLabel.label("Usuario")
 	}
 	
-	def crearNodo(Usuario u) {
+	private def mensajeLabel() {
+		DynamicLabel.label("Mensaje")
+	}
+	
+	def crearNodoMensaje(String msj) {
+		val node = this.graph.createNode(mensajeLabel)
+		node.setProperty("mensaje", msj) 
+		node.setProperty("clave",new java.sql.Timestamp(now.getTime()))
+		node
+	}
+	
+	def crearNodoUsuario(Usuario u) {
 		val node = this.graph.createNode(usuarioLabel)
 		node.setProperty("nombreUsuario", u.nombreUsuario)
 		node.setProperty("usuarioId", u.usuarioId)
 	}
 	
+	def getNodo(String userName) {
+		this.graph.findNodes(usuarioLabel, "nombreUsuario", userName).head
+	}
+	
 	def getNodo(Usuario u) {
 		this.getNodo(u.nombreUsuario)
 	}
-	
-	def getNodo(String userName) {
-		this.graph.findNodes(usuarioLabel, "nombreUsuario", userName).head
+			
+	def relacionarMensaje(Usuario u1, Usuario u2, String msj, TipoDeRelaciones emisor, TipoDeRelaciones receptor) {
+		val nodo1 = this.getNodo(u1);
+		val nodo2 = this.getNodo(u2);
+		val nodoMsj = this.crearNodoMensaje(msj);
+		nodo1.createRelationshipTo(nodoMsj, emisor);
+		nodo2.createRelationshipTo(nodoMsj, receptor);
 	}
 	
 	def relacionar(Usuario u1, Usuario u2, TipoDeRelaciones relacion) {
@@ -49,9 +71,14 @@ class HomeRedSocial {
 	def getAmigos(Usuario u) {
 		val nodoUsuario = this.getNodo(u)
 		val nodoAmigos = this.nodosRelacionados(nodoUsuario, TipoDeRelaciones.AMIGO, Direction.INCOMING)//??????????????????
-		nodoAmigos.map[toUsuario].toSet
+		return nodoAmigos.map[toUsuario].toSet
 	}
 	
+	def getAmigosDeAmigos(Usuario u) {
+		val amigos = this.getAmigos(u)
+		return amigos.map[this.getAmigos(it)].flatten.toSet
+	}
+		
 	protected def nodosRelacionados(Node nodo, RelationshipType tipo, Direction direccion) {
 		nodo.getRelationships(tipo, direccion).map[it.getOtherNode(nodo)]
 	}

@@ -14,12 +14,12 @@ class ServicioRedSocial {
 	def agregarUsuario(Usuario u) {
 		
 		GraphServiceRunner::run[
-			createHome(it).crearNodo(u); 
+			createHome(it).crearNodoUsuario(u); 
 			null
 		]
 	}
 	
-	def amigos(Usuario u1, Usuario u2) {
+	def agregarComoAmigo(Usuario u1, Usuario u2) {
 		GraphServiceRunner::run[
 			val home = createHome(it);
 			home.relacionar(u1, u2, TipoDeRelaciones.AMIGO)
@@ -27,13 +27,26 @@ class ServicioRedSocial {
 		]
 	}
 	
-	def enviarMensajeA(Usuario u, String mensaje){
+	def obtenerAmigos(Usuario u) {
+		GraphServiceRunner::run[
+			val home = createHome(it);
+			home.getAmigos(u)
+		]
+	}
+	
+	def obtenerPersonasConectadas(Usuario u) {
+		GraphServiceRunner::run[
+			val home = createHome(it);
+			home.getAmigosDeAmigos(u)
+		]
+	}
+	
+	def enviarMensajeA(Usuario u1, Usuario u2, String mensaje){
 		
 		GraphServiceRunner::run[
-			
 			val home = createHome(it)
-			val destinatario = home.getNodo(u)
-			destinatario.enviarMensaje(mensaje)
+	//preguntar si son amigos, y si las relaciones no podemos "hardcodearlas"
+			home.relacionarMensaje(u1, u2, mensaje, TipoDeRelaciones.MENSAJE_A, TipoDeRelaciones.MENSAJE_DE)
 		]
 	}
 }

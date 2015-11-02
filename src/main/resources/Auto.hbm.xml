@@ -11,13 +11,12 @@
 		<property name="marca" type="string"></property>
 
 		<property name="modelo" type="string"></property>
-
+ 
 		<property name="año" type="int"></property>
 
 		<property name="patente" type="string"></property>
 
 		<property name="costoBase" type="double"></property>
-
 
 
 		<many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
