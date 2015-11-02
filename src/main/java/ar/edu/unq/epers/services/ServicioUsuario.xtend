@@ -9,6 +9,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 @Accessors
 class ServicioUsuario {
 	GenericHome<Usuario> home
+	ServicioRedSocial socialService
 	
 	new(GenericHome<Usuario> h) {
 		home = h
@@ -103,6 +104,7 @@ class ServicioUsuario {
 		SessionManager.runInSession[|
 			
 			this.home.save(u)
+			this.socialService.agregarUsuario(u)
 		]
 	}
 	

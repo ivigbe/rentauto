@@ -18,7 +18,6 @@ class Usuario {
 	List<Reserva> reservas  = newArrayList()
 	Integer usuarioId
 	
-	
 	new(){}
 	
 	new(String name, String apell, String nameUser, String pass, String email, Date fechaNacimiento)
@@ -50,5 +49,4 @@ class Usuario {
 	def getReservas() {
 		return this.reservas
 	}
-
 }
