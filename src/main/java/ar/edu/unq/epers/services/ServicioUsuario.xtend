@@ -1,6 +1,6 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.GenericHome
+import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.homes.SessionManager
 import ar.edu.unq.epers.model.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
@@ -8,12 +8,38 @@ import org.eclipse.xtend.lib.annotations.Accessors
 //import java.util.Random
 @Accessors
 class ServicioUsuario {
-	GenericHome<Usuario> home
-	ServicioRedSocial socialService
+	HomeUsuario home
+	ServicioRedSocial socialService = new ServicioRedSocial()
 	
-	new(GenericHome<Usuario> h) {
+	new(){}
+	
+	new(HomeUsuario h) {
 		home = h
 	}
+
+def void guardarUsuario(Usuario u)
+	{
+		SessionManager.runInSession[|
+			
+			this.home.save(u)
+			this.socialService.agregarUsuario(u)
+		]
+	}
+	
+	def getUsuarioPorId(int id){
+		SessionManager.runInSession[|
+			this.home.get(id)
+		]		
+	}
+	
+	def getUsuarioPorNombreUsuario(String userName){
+		
+		SessionManager.runInSession[|
+			
+			this.home.getForUserName(userName)
+		]
+	}
+}
 //	EnviadorDeMails em
 //
 //
@@ -96,21 +122,3 @@ class ServicioUsuario {
 //
 //		this.home.actualizar(usuario)
 //	}
-	
-	/////////////////////////////////////////////////////////////////////////////////////////
-	
-	def void guardarUsuario(Usuario u)
-	{
-		SessionManager.runInSession[|
-			
-			this.home.save(u)
-			this.socialService.agregarUsuario(u)
-		]
-	}
-	
-	def getUsuarioPorId(int id){
-		SessionManager.runInSession[|
-			this.home.get(id)
-		]		
-	}
-}

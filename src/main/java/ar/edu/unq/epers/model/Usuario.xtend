@@ -30,6 +30,11 @@ class Usuario {
 		this.fechaNacimiento = fechaNacimiento
 		this.reservas = new ArrayList <Reserva>()
 	}
+	
+	new(String nameUser){
+		
+		this.nombreUsuario = nameUser
+	}
 
 	def validar() {
 		this.validado = true

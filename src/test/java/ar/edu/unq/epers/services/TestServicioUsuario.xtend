@@ -1,14 +1,14 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.model.Usuario
-import ar.edu.unq.epers.homes.GenericHome
-import org.junit.Before
-import java.util.Date
-import ar.edu.unq.epers.homes.HomeProvider
-import org.junit.Test
-import static org.junit.Assert.*
-import org.junit.After
+import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.homes.SessionManager
+import ar.edu.unq.epers.model.Usuario
+import java.util.Date
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 class TestServicioUsuario {
 //
@@ -122,14 +122,14 @@ class TestServicioUsuario {
 //		assertTrue(u1.password == "linux")
 //	}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	GenericHome<Usuario> home
+	HomeUsuario home
 	ServicioUsuario service
 	Usuario u
 
 	@Before
 	def void setUp() {
 		u = new Usuario("Homero", "Simpson", "elHomer", "1234", "homero@gmail.com", new Date())
-		home = HomeProvider.usuarioHome
+		home = new HomeUsuario()
 		service = new ServicioUsuario(home)
 
 		service.guardarUsuario(u)

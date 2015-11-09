@@ -13,7 +13,8 @@ import java.util.Date
 class HomeRedSocial {
 	
 	GraphDatabaseService graph
-	ServicioUsuario serviceUsuario
+	HomeUsuario homeUsuario = new HomeUsuario()
+	ServicioUsuario serviceUsuario = new ServicioUsuario(homeUsuario)
 	Calendar calendar = Calendar.getInstance();
 	Date now = calendar.getTime();
 	
@@ -39,7 +40,7 @@ class HomeRedSocial {
 	def crearNodoUsuario(Usuario u) {
 		val node = this.graph.createNode(usuarioLabel)
 		node.setProperty("nombreUsuario", u.nombreUsuario)
-		node.setProperty("usuarioId", u.usuarioId)
+		//node.setProperty("usuarioId", u.usuarioId)
 	}
 	
 	def getNodo(String userName) {
@@ -65,7 +66,7 @@ class HomeRedSocial {
 	}
 	
 	private def toUsuario(Node nodo) {
-		this.serviceUsuario.getUsuarioPorId(nodo.getProperty("usuarioId") as Integer)
+		return this.serviceUsuario.getUsuarioPorNombreUsuario(nodo.getProperty("nombreUsuario") as String)
 	}
 	
 	def getAmigos(Usuario u) {

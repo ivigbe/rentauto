@@ -1,14 +1,26 @@
 package ar.edu.unq.epers.homes
 
-class HomeUsuario<T> extends GenericHome<T>{
+import ar.edu.unq.epers.model.Usuario
+
+class HomeUsuario extends GenericHome<Usuario>{
 //
 //	Connection c
 //	PreparedStatement ps
 //	ResultSet rs
 //	
-	new(Class<T> entityType) {
-		super(entityType)
+	new() {
+		super(Usuario)
 	}
+	
+	def getForUserName(String userName) {
+		
+		val session = SessionManager.session
+		session.createQuery("from Usuario u where u.nombreUsuario = :u").setParameter("u", userName).
+		uniqueResult() as Usuario
+		
+	}
+	
+	
 //
 //	/**
 //	 * Genera una conexion a la base de datos.
