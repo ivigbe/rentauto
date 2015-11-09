@@ -45,8 +45,16 @@ class ServicioRedSocial {
 		
 		GraphServiceRunner::run[
 			val home = createHome(it)
-	//preguntar si son amigos, y si las relaciones no podemos "hardcodearlas"
-			home.relacionarMensaje(u1, u2, mensaje, TipoDeRelaciones.MENSAJE_A, TipoDeRelaciones.MENSAJE_DE)
+			if (this.sonAmigos(u1, u2)) 
+				home.relacionarMensaje(u1, u2, mensaje)
 		]
 	}
+	
+	def sonAmigos(Usuario u1, Usuario u2) {
+		GraphServiceRunner::run[
+			val home = createHome(it)
+			home.getAmigos(u1).contains(u2)
+		]
+	}
+	
 }

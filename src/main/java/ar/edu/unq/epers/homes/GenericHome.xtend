@@ -1,9 +1,5 @@
 package ar.edu.unq.epers.homes
 
-import ar.edu.unq.epers.model.Ubicacion
-import java.util.Date
-import ar.edu.unq.epers.model.Categoria
-
 class GenericHome<T> implements Home<T> {
 	Class<T> entityType
 

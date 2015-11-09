@@ -51,12 +51,12 @@ class HomeRedSocial {
 		this.getNodo(u.nombreUsuario)
 	}
 			
-	def relacionarMensaje(Usuario u1, Usuario u2, String msj, TipoDeRelaciones emisor, TipoDeRelaciones receptor) {
+	def relacionarMensaje(Usuario u1, Usuario u2, String msj) {
 		val nodo1 = this.getNodo(u1);
 		val nodo2 = this.getNodo(u2);
 		val nodoMsj = this.crearNodoMensaje(msj);
-		nodo1.createRelationshipTo(nodoMsj, emisor);
-		nodo2.createRelationshipTo(nodoMsj, receptor);
+		nodo1.createRelationshipTo(nodoMsj, TipoDeRelaciones.MENSAJE_A);
+		nodo2.createRelationshipTo(nodoMsj, TipoDeRelaciones.MENSAJE_DE);
 	}
 	
 	def relacionar(Usuario u1, Usuario u2, TipoDeRelaciones relacion) {
