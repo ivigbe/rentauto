@@ -1,14 +1,14 @@
 package ar.edu.unq.epers.services
 
 import ar.edu.unq.epers.homes.HomeUsuario
-import ar.edu.unq.epers.homes.SessionManager
 import ar.edu.unq.epers.model.Usuario
 import java.util.Date
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.After
+import ar.edu.unq.epers.homes.SessionManager
 
 class TestServicioUsuario {
 //
@@ -125,20 +125,35 @@ class TestServicioUsuario {
 	HomeUsuario home
 	ServicioUsuario service
 	Usuario u
+	Usuario u2
+	Usuario u3
+	Usuario u4
 
 	@Before
 	def void setUp() {
-		u = new Usuario("Homero", "Simpson", "elHomer", "1234", "homero@gmail.com", new Date())
+		u = new Usuario("Homero", "Simpson", "fv", "1234", "homero@gmail.com", new Date())
+		u2 = new Usuario("Bart", "Simpson", "ib", "3456", "bart@gmail.com", new Date())
+		u3 = new Usuario("Lisa", "Simpson", "jp", "4567", "lisa@gmail.com", new Date())
+		u4 = new Usuario("Marge", "Simpson", "ManoloPerez", "7812", "marge@gmail.com", new Date())
 		home = new HomeUsuario()
 		service = new ServicioUsuario(home)
 
 		service.guardarUsuario(u)
+		service.guardarUsuario(u2)
+		service.guardarUsuario(u3)
+		service.guardarUsuario(u4)
 	}
 
 	@Test
 	def void testGuardarUsuario() {
 		val usuario = service.getUsuarioPorId(u.usuarioId)
+		val usuario2 = service.getUsuarioPorId(u2.usuarioId)
+		val usuario3 = service.getUsuarioPorId(u3.usuarioId)
+		val usuario4 = service.getUsuarioPorId(u4.usuarioId)
 		assertTrue(usuario.usuarioId == u.usuarioId)
+		assertTrue(usuario2.usuarioId == u2.usuarioId)
+		assertTrue(usuario3.usuarioId == u3.usuarioId)
+		assertTrue(usuario4.usuarioId == u4.usuarioId)
 	}
 
 	@After

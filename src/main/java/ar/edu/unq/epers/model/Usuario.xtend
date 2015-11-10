@@ -54,4 +54,21 @@ class Usuario {
 	def getReservas() {
 		return this.reservas
 	}
+	
+	@Override
+	override def equals(Object u){
+		if (this === u) {
+			return true;
+		}
+		if (u instanceof Usuario) {
+			val Usuario other = u as Usuario;
+			return other.usuarioId == this.usuarioId;
+		}
+		return false;
+	}
+	
+	@Override
+	override hashCode(){
+		this.usuarioId.hashCode
+	}
 }

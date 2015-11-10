@@ -5,16 +5,21 @@ import ar.edu.unq.epers.homes.SessionManager
 import ar.edu.unq.epers.model.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
 
-//import java.util.Random
 @Accessors
 class ServicioUsuario {
 	HomeUsuario home
-	ServicioRedSocial socialService = new ServicioRedSocial()
+	ServicioRedSocial socialService
 	
 	new(){}
 	
 	new(HomeUsuario h) {
-		home = h
+		this.home = h
+	}
+	
+	new(HomeUsuario h, ServicioRedSocial social){
+		this.home = h
+		this.socialService = social
+		
 	}
 
 def void guardarUsuario(Usuario u)
