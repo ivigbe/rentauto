@@ -20,6 +20,11 @@ class Reserva {
 
 	new() {
 	}
+	
+	new(Auto a){
+		
+		this.auto = a
+	}
 
 	new(Integer numeroSoli, Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF, Auto au, Usuario user) {
 

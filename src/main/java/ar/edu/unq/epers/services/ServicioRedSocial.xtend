@@ -5,8 +5,15 @@ import ar.edu.unq.epers.model.TipoDeRelaciones
 import org.neo4j.graphdb.GraphDatabaseService
 import ar.edu.unq.epers.homes.HomeRedSocial
 import ar.edu.unq.epers.model.Mensaje
+import ar.edu.unq.epers.model.CalificacionAuto
+import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.epers.model.ComentarioAuto
+import ar.edu.unq.epers.homes.HomePerfil
 
+@Accessors
 class ServicioRedSocial {
+	
+	HomePerfil homePerfil
 	
 	private def createHome(GraphDatabaseService graph) {
 		new HomeRedSocial(graph)
@@ -72,6 +79,11 @@ class ServicioRedSocial {
 			val home = createHome(it)
 			home.getAmigos(u1).contains(u2)
 		]
+	}
+	
+	def calificarAutoAlquilado(CalificacionAuto c, ComentarioAuto coment, Usuario u){
+		
+		homePerfil.calificar(c, coment)
 	}
 	
 }

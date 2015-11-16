@@ -4,6 +4,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.Date
 import java.util.List
 import java.util.ArrayList
+import org.mongojack.ObjectId
+import com.fasterxml.jackson.annotation.JsonProperty
 
 @Accessors
 class Usuario {
@@ -16,6 +18,8 @@ class Usuario {
 	String password
 	Boolean validado
 	List<Reserva> reservas  = newArrayList()
+	@ObjectId
+	@JsonProperty("_id")
 	Integer usuarioId
 	
 	new(){}

@@ -3,6 +3,8 @@ package ar.edu.unq.epers.model
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.mongojack.ObjectId
+import com.fasterxml.jackson.annotation.JsonProperty
 
 @Accessors
 //@EqualsHashCode //Para que genere los metodos equals y hashcode. Sirve para hacer la comparacion entre objetos
@@ -13,6 +15,8 @@ class Auto {
 	String patente
 	Double costoBase
 	Categoria categoria
+	@ObjectId
+	@JsonProperty("_id")
 	Integer autoId
 	
 	//Debe estar ordenado
