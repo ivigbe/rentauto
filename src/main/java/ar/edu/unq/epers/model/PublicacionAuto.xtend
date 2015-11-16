@@ -5,13 +5,14 @@ import org.mongojack.ObjectId
 import com.fasterxml.jackson.annotation.JsonProperty
 
 @Accessors
-class ComentarioAuto {
+class PublicacionAuto {
 	
 	@ObjectId
 	@JsonProperty("_id")
 	
 	String id
 	String comentario
+	NivelVisibilidadAuto nivelVisibilidad
 	
 	new(String coment){
 		

@@ -1,14 +1,13 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.model.Usuario
-import ar.edu.unq.epers.model.TipoDeRelaciones
-import org.neo4j.graphdb.GraphDatabaseService
+import ar.edu.unq.epers.homes.HomePerfil
 import ar.edu.unq.epers.homes.HomeRedSocial
 import ar.edu.unq.epers.model.Mensaje
-import ar.edu.unq.epers.model.CalificacionAuto
+import ar.edu.unq.epers.model.Reserva
+import ar.edu.unq.epers.model.TipoDeRelaciones
+import ar.edu.unq.epers.model.Usuario
 import org.eclipse.xtend.lib.annotations.Accessors
-import ar.edu.unq.epers.model.ComentarioAuto
-import ar.edu.unq.epers.homes.HomePerfil
+import org.neo4j.graphdb.GraphDatabaseService
 
 @Accessors
 class ServicioRedSocial {
@@ -81,9 +80,9 @@ class ServicioRedSocial {
 		]
 	}
 	
-	def calificarAutoAlquilado(CalificacionAuto c, ComentarioAuto coment, Usuario u){
+	def calificarAutoReservado(Reserva r, Usuario u){
 		
-		homePerfil.calificar(c, coment)
+		homePerfil.calificar(r, u)
 	}
 	
 }
