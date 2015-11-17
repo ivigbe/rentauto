@@ -21,9 +21,9 @@ class Reserva {
 	new() {
 	}
 	
-	new(Auto a){
+	new(Integer n){
 		
-		this.auto = a
+		this.numeroSolicitud = n
 	}
 
 	new(Integer numeroSoli, Ubicacion ori, Ubicacion des, Date fechaI, Date fechaF, Auto au, Usuario user) {

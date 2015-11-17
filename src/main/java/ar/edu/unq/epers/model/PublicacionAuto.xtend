@@ -12,10 +12,22 @@ class PublicacionAuto {
 	
 	String id
 	String comentario
-	NivelVisibilidadAuto nivelVisibilidad
-	
-	new(String coment){
+	String nombreDeUsuario
+	Integer numeroSolicitudDeUnaReserva
+	CalificacionAuto calificacion
+	NivelVisibilidadAuto privacidad
+	 
+	new(String unComentario, String unNombreUsuario, Integer unNumeroReserva, CalificacionAuto unaCalificacion, NivelVisibilidadAuto unaPrivacidad){
 		
-		this.comentario = coment
+		this.comentario = unComentario
+		this.nombreDeUsuario = unNombreUsuario
+		this.numeroSolicitudDeUnaReserva = unNumeroReserva
+		this.calificacion = unaCalificacion 
+		this.privacidad = unaPrivacidad		
 	}
-}
+	
+	
+	
+	
+}//coleccione de perfiles y dentro coleccion de publicaciones. cada perfil tiene su usuario, 
+	//y una coleccion de publicaciones.

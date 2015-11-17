@@ -1,18 +1,25 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.HomePerfil
 import ar.edu.unq.epers.homes.HomeRedSocial
 import ar.edu.unq.epers.model.Mensaje
-import ar.edu.unq.epers.model.Reserva
+import ar.edu.unq.epers.model.NivelVisibilidadAuto
+import ar.edu.unq.epers.model.PublicacionAuto
 import ar.edu.unq.epers.model.TipoDeRelaciones
 import ar.edu.unq.epers.model.Usuario
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.neo4j.graphdb.GraphDatabaseService
+import ar.edu.unq.epers.homes.HomePublicacion
 
 @Accessors
 class ServicioRedSocial {
 	
-	HomePerfil homePerfil
+	HomePublicacion homePerfil
+	
+	new (HomePublicacion h){
+		this.homePerfil = h		
+	}
 	
 	private def createHome(GraphDatabaseService graph) {
 		new HomeRedSocial(graph)
@@ -71,8 +78,6 @@ class ServicioRedSocial {
 		]
 	}
 	
-	
-	
 	def sonAmigos(Usuario u1, Usuario u2) {
 		GraphServiceRunner::run[
 			val home = createHome(it)
@@ -80,9 +85,28 @@ class ServicioRedSocial {
 		]
 	}
 	
-	def calificarAutoReservado(Reserva r, Usuario u){
-		
-		homePerfil.calificar(r, u)
+	def ingresarPublicacionReserva(PublicacionAuto p){
+		homePerfil.guardarPublicacion(p)
 	}
 	
+	def verPublicaciones(Usuario miUsuario, Usuario otroUsuario){
+		
+		val List<NivelVisibilidadAuto> p = new ArrayList()
+		
+		if(miUsuario.equals(otroUsuario)){
+			p.add(NivelVisibilidadAuto.SOLOAMIGOS)
+			p.add(NivelVisibilidadAuto.PRIVADO)
+			p.add(NivelVisibilidadAuto.PUBLICO)
+		}else{
+			if (sonAmigos (miUsuario, otroUsuario)){
+				p.add(NivelVisibilidadAuto.SOLOAMIGOS)
+				p.add(NivelVisibilidadAuto.PUBLICO)
+			}else{
+				p.add(NivelVisibilidadAuto.PUBLICO)
+			}
+		}
+		
+		val publicaciones = homePerfil.verPublicaciones(miUsuario, otroUsuario, p)
+		return publicaciones
+	}
 }

@@ -1,6 +1,5 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.HomePerfil
 import ar.edu.unq.epers.homes.HomeReserva
 import ar.edu.unq.epers.homes.HomeUsuario
 import ar.edu.unq.epers.model.Auto
@@ -13,6 +12,9 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import ar.edu.unq.epers.model.CalificacionAuto
+import ar.edu.unq.epers.model.NivelVisibilidadAuto
+import ar.edu.unq.epers.homes.HomePublicacion
 
 class TestServicioRedSocial {
 	Usuario u1
@@ -23,12 +25,13 @@ class TestServicioRedSocial {
 	ServicioUsuario service
 	HomeUsuario home
 	ServicioRedSocial redSocial
-	HomePerfil perfil
-	PublicacionAuto publicacion1
-	Auto a
-	Reserva r
-	HomeReserva homeReserva
-	ServicioReserva serviceReserva
+	HomePublicacion perfil
+	PublicacionAuto publicacionPrivada
+	PublicacionAuto publicacionPublica
+	PublicacionAuto publicacionAmigos
+	Reserva r1
+	Reserva r2
+	Reserva r3
 	
 	@Before
 	def void setUp(){
@@ -38,7 +41,8 @@ class TestServicioRedSocial {
 		u3 = new Usuario("Lisa", "Simpson", "jp", "4567", "lisa@gmail.com", new Date())
 		u4 = new Usuario("Marge", "Simpson", "ManoloPerez", "7812", "marge@gmail.com", new Date())
 		m = new Mensaje("Hola Mundo!")
-		redSocial = new ServicioRedSocial()
+		perfil = new HomePublicacion()
+		redSocial = new ServicioRedSocial(perfil)
 		home = new HomeUsuario()
 		service = new ServicioUsuario(home, redSocial)
 		service.guardarUsuario(u1)
@@ -52,13 +56,19 @@ class TestServicioRedSocial {
 		redSocial.enviarMensajeA(u2, u4, m)
 		
 		//COMENTARIOS
-		a = new Auto()
-		r = new Reserva(a)
-		homeReserva = new HomeReserva()
-		serviceReserva = new ServicioReserva(homeReserva)
-		serviceReserva.hacerReserva(r)
-		publicacion1 = new PublicacionAuto("Muy bueno")
-		perfil = new HomePerfil()
+		r1 = new Reserva(1)
+		r2 = new Reserva(2)
+		r3 = new Reserva(3)
+		
+		publicacionPublica = new PublicacionAuto("malisimo el auto", u2.nombreUsuario, r1.numeroSolicitud,
+												CalificacionAuto.MALO, NivelVisibilidadAuto.PUBLICO)
+		publicacionPrivada = new PublicacionAuto("me lo guardo", u2.nombreUsuario, r2.numeroSolicitud,
+												CalificacionAuto.REGULAR, NivelVisibilidadAuto.PRIVADO)
+		publicacionAmigos = new PublicacionAuto("solo para amigos", u2.nombreUsuario, r3.numeroSolicitud,
+												CalificacionAuto.EXCELENTE, NivelVisibilidadAuto.SOLOAMIGOS)
+		redSocial.ingresarPublicacionReserva(publicacionPublica)
+		redSocial.ingresarPublicacionReserva(publicacionPrivada)
+		redSocial.ingresarPublicacionReserva(publicacionAmigos)
 	}
 	
 	@Test
@@ -104,9 +114,10 @@ class TestServicioRedSocial {
 	}
 	
 	@Test
-	def void testCalificoUnAutoQueAlquile()
-	{
-		redSocial.calificarAutoReservado(r, u1)
+	def void testCalificoUnAutoQueAlquileExcelente(){
+		
+		assertTrue(redSocial.verPublicaciones(u2,u2).contains(publicacionAmigos))
+		
 	}
 	
 	
