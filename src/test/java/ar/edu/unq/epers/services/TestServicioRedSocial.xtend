@@ -1,9 +1,10 @@
 package ar.edu.unq.epers.services
 
-import ar.edu.unq.epers.homes.HomeReserva
+import ar.edu.unq.epers.homes.HomePublicacion
 import ar.edu.unq.epers.homes.HomeUsuario
-import ar.edu.unq.epers.model.Auto
+import ar.edu.unq.epers.model.CalificacionAuto
 import ar.edu.unq.epers.model.Mensaje
+import ar.edu.unq.epers.model.NivelVisibilidadAuto
 import ar.edu.unq.epers.model.PublicacionAuto
 import ar.edu.unq.epers.model.Reserva
 import ar.edu.unq.epers.model.Usuario
@@ -12,9 +13,6 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
-import ar.edu.unq.epers.model.CalificacionAuto
-import ar.edu.unq.epers.model.NivelVisibilidadAuto
-import ar.edu.unq.epers.homes.HomePublicacion
 
 class TestServicioRedSocial {
 	Usuario u1
@@ -116,9 +114,29 @@ class TestServicioRedSocial {
 	@Test
 	def void testCalificoUnAutoQueAlquileExcelente(){
 		
-		assertTrue(redSocial.verPublicaciones(u2,u2).contains(publicacionAmigos))
+		assertTrue(redSocial.verPublicaciones(u2,u2).contains(publicacionPrivada))//PORQUE DA ASSERTION ERROR!!!!!???????????
 		
 	}
 	
+	@Test
+	def void testEstablezcoUnNivelDeVisibilidadAUnaPublicacion(){
+		
+		assertEquals(NivelVisibilidadAuto.SOLOAMIGOS, publicacionAmigos.visibilidad)
+	}
 	
+	@Test
+	def void testUnUsuarioVeElPerfilDeUnUsuarioAmigo(){
+		
+		assertTrue(redSocial.verPublicaciones(u1,u2).contains(publicacionAmigos))
+		assertTrue(redSocial.verPublicaciones(u1,u2).contains(publicacionPublica))
+		assertFalse(redSocial.verPublicaciones(u1,u2).contains(publicacionPrivada))
+	}
+	
+	@Test
+	def void testUnUsuarioVeElPerfilDeUnUsuarioDelQueNoEsAmigo(){
+		
+		assertTrue(redSocial.verPublicaciones(u1,u3).contains(publicacionPublica))
+		assertFalse(redSocial.verPublicaciones(u1,u3).contains(publicacionPrivada))
+		assertTrue(redSocial.verPublicaciones(u1,u3).contains(publicacionAmigos))
+	}
 }

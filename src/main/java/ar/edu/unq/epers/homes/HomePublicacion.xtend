@@ -19,9 +19,9 @@ class HomePublicacion {
 		homePublicacion.insert(publicacion)
 	}
 	
-	def verPublicaciones(Usuario usuario, Usuario usuario2, List<NivelVisibilidadAuto> unaPrivacidad) {
+	def verPublicaciones(Usuario usuario, Usuario usuario2, List<NivelVisibilidadAuto> visibilidades) {
 		val query1 = DBQuery.is("nombreDeUsuario" , usuario2.nombreUsuario)
-		val query2 = DBQuery.in("privacidad" , unaPrivacidad)  
+		val query2 = DBQuery.in("visibilidad" , visibilidades)  
 		val publicaciones = homePublicacion.mongoCollection.find(query1.and(query2))
 		return publicaciones.toArray
 	}

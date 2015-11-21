@@ -15,10 +15,10 @@ import ar.edu.unq.epers.homes.HomePublicacion
 @Accessors
 class ServicioRedSocial {
 	
-	HomePublicacion homePerfil
+	HomePublicacion homePublicacion
 	
 	new (HomePublicacion h){
-		this.homePerfil = h		
+		this.homePublicacion = h		
 	}
 	
 	private def createHome(GraphDatabaseService graph) {
@@ -86,27 +86,27 @@ class ServicioRedSocial {
 	}
 	
 	def ingresarPublicacionReserva(PublicacionAuto p){
-		homePerfil.guardarPublicacion(p)
+		homePublicacion.guardarPublicacion(p)
 	}
 	
 	def verPublicaciones(Usuario miUsuario, Usuario otroUsuario){
 		
-		val List<NivelVisibilidadAuto> p = new ArrayList()
+		val List<NivelVisibilidadAuto> visibilities = new ArrayList()
 		
 		if(miUsuario.equals(otroUsuario)){
-			p.add(NivelVisibilidadAuto.SOLOAMIGOS)
-			p.add(NivelVisibilidadAuto.PRIVADO)
-			p.add(NivelVisibilidadAuto.PUBLICO)
+			visibilities.add(NivelVisibilidadAuto.SOLOAMIGOS)
+			visibilities.add(NivelVisibilidadAuto.PRIVADO)
+			visibilities.add(NivelVisibilidadAuto.PUBLICO)
 		}else{
 			if (sonAmigos (miUsuario, otroUsuario)){
-				p.add(NivelVisibilidadAuto.SOLOAMIGOS)
-				p.add(NivelVisibilidadAuto.PUBLICO)
+				visibilities.add(NivelVisibilidadAuto.SOLOAMIGOS)
+				visibilities.add(NivelVisibilidadAuto.PUBLICO)
 			}else{
-				p.add(NivelVisibilidadAuto.PUBLICO)
+				visibilities.add(NivelVisibilidadAuto.PUBLICO)
 			}
 		}
 		
-		val publicaciones = homePerfil.verPublicaciones(miUsuario, otroUsuario, p)
+		val publicaciones = homePublicacion.verPublicaciones(miUsuario, otroUsuario, visibilities)
 		return publicaciones
 	}
 }
