@@ -16,7 +16,8 @@ class HomePublicacion {
 	
 	def guardarPublicacion(PublicacionAuto publicacion) {
 		homePublicacion = SistemDB.instance().collection(PublicacionAuto)
-		homePublicacion.insert(publicacion)
+		val result = homePublicacion.insert(publicacion)
+		publicacion.id = result.savedId
 	}
 	
 	def verPublicaciones(Usuario usuario, Usuario usuario2, List<NivelVisibilidadAuto> visibilidades) {

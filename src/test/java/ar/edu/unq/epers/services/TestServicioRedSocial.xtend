@@ -13,6 +13,7 @@ import org.junit.Before
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.junit.After
 
 class TestServicioRedSocial {
 	Usuario u1
@@ -26,6 +27,8 @@ class TestServicioRedSocial {
 	HomePublicacion perfil
 	PublicacionAuto publicacionPrivada
 	PublicacionAuto publicacionPublica
+	PublicacionAuto publicacionPublicaU1
+	PublicacionAuto publicacionPublicaU4
 	PublicacionAuto publicacionAmigos
 	Reserva r1
 	Reserva r2
@@ -60,13 +63,24 @@ class TestServicioRedSocial {
 		
 		publicacionPublica = new PublicacionAuto("malisimo el auto", u2.nombreUsuario, r1.numeroSolicitud,
 												CalificacionAuto.MALO, NivelVisibilidadAuto.PUBLICO)
+		
+		publicacionPublicaU1 = new PublicacionAuto("muy buena atencion", u1.nombreUsuario, r1.numeroSolicitud,
+												CalificacionAuto.BUENO, NivelVisibilidadAuto.PUBLICO)
+												
+		publicacionPublicaU4 = new PublicacionAuto("mala la atencion", u4.nombreUsuario, r2.numeroSolicitud,
+												CalificacionAuto.MALO, NivelVisibilidadAuto.PUBLICO)
+		
 		publicacionPrivada = new PublicacionAuto("me lo guardo", u2.nombreUsuario, r2.numeroSolicitud,
 												CalificacionAuto.REGULAR, NivelVisibilidadAuto.PRIVADO)
+		
 		publicacionAmigos = new PublicacionAuto("solo para amigos", u2.nombreUsuario, r3.numeroSolicitud,
 												CalificacionAuto.EXCELENTE, NivelVisibilidadAuto.SOLOAMIGOS)
+
 		redSocial.ingresarPublicacionReserva(publicacionPublica)
 		redSocial.ingresarPublicacionReserva(publicacionPrivada)
 		redSocial.ingresarPublicacionReserva(publicacionAmigos)
+		redSocial.ingresarPublicacionReserva(publicacionPublicaU1)
+		redSocial.ingresarPublicacionReserva(publicacionPublicaU4)
 	}
 	
 	@Test
@@ -114,7 +128,7 @@ class TestServicioRedSocial {
 	@Test
 	def void testCalificoUnAutoQueAlquileExcelente(){
 		
-		assertTrue(redSocial.verPublicaciones(u2,u2).contains(publicacionPrivada))//PORQUE DA ASSERTION ERROR!!!!!???????????
+		assertTrue(redSocial.verPublicaciones(u2,u2).contains(publicacionPrivada))
 		
 	}
 	
@@ -127,16 +141,23 @@ class TestServicioRedSocial {
 	@Test
 	def void testUnUsuarioVeElPerfilDeUnUsuarioAmigo(){
 		
-		assertTrue(redSocial.verPublicaciones(u1,u2).contains(publicacionAmigos))
-		assertTrue(redSocial.verPublicaciones(u1,u2).contains(publicacionPublica))
-		assertFalse(redSocial.verPublicaciones(u1,u2).contains(publicacionPrivada))
+		val publicaciones = redSocial.verPublicaciones(u1,u2)
+		assertTrue(publicaciones.contains(publicacionAmigos))
+		assertTrue(publicaciones.contains(publicacionPublica))
+		assertFalse(publicaciones.contains(publicacionPrivada))
 	}
 	
 	@Test
 	def void testUnUsuarioVeElPerfilDeUnUsuarioDelQueNoEsAmigo(){
 		
-		assertTrue(redSocial.verPublicaciones(u1,u3).contains(publicacionPublica))
-		assertFalse(redSocial.verPublicaciones(u1,u3).contains(publicacionPrivada))
-		assertTrue(redSocial.verPublicaciones(u1,u3).contains(publicacionAmigos))
+		val publicaciones = redSocial.verPublicaciones(u1,u4)
+		
+		assertTrue(publicaciones.contains(publicacionPublicaU4))
+		assertFalse(publicaciones.contains(publicacionPublicaU1))
+	}
+	
+	@After
+	def void cleanDB(){
+		perfil.homePublicacion.mongoCollection.drop
 	}
 }
