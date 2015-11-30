@@ -6,6 +6,7 @@ import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Ubicacion
 import java.util.Date
+import java.util.List
 
 class ServicioAuto {
 
@@ -54,10 +55,19 @@ class ServicioAuto {
 		SessionManager.runInSession [|
 			if(! (cacheService.estaEnCache(ubicacion, fechaInicio, fechaFin))){
 				val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
-				cacheService.guardarAutosDisponibles(autos, ubicacion, fechaInicio, fechaFin)
+				val autosACachear = obtenerIds(autos)
+				cacheService.guardarAutosDisponibles(autosACachear, ubicacion, fechaInicio, fechaFin)
 			}
-			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)
+			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)		
 		]
+	}
+	
+	def obtenerIds(List<Auto> autos) {
+		val ids = newArrayList()
+		for(Auto a : autos){
+			ids.add(a.autoId)
+		}
+		return ids
 	}
 	
 	def obtenerAutosPor(Ubicacion origen, Ubicacion destino, Date finicio, Date ffin, Categoria categoria) {

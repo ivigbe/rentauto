@@ -19,35 +19,34 @@ import org.easycassandra.Index
 class CacheSystem {
 	
 	@Id
-	private String cacheId
-	
 	@Index
 	@Column(name="ubicacion")
 	Ubicacion ubicacion
 	
-	@Index
+	@Id
 	@Column(name="fechaInicio")
 	Date fechaInicio
 	
-	@Index
+	@Id
 	@Column(name="fechaFin")
 	Date fechaFin
 	
 	@Column(name="autosDisponibles")
 	List<Integer> idDeAutosDisponibles = newArrayList()
 	
+	new(){}
+	
 	@Override
 	override boolean equals(Object obj) {
-	 if(obj instanceof CacheSystem) {
-		 val other = CacheSystem.cast(obj)
-		 return new EqualsBuilder().append(cacheId, other.cacheId).isEquals()
-	 }
+	 	if(obj instanceof CacheSystem) {
+			val other = CacheSystem.cast(obj)
+		 	return new EqualsBuilder().append(cacheId, other.cacheId).isEquals()
+	 	}
 	 	return false
 	}
   
 	@Override
 	override int hashCode() {
-	
 		return new HashCodeBuilder().append(cacheId).toHashCode()
 	}
 	

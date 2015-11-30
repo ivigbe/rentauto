@@ -1,11 +1,11 @@
 package ar.edu.unq.epers.services
 
 import ar.edu.unq.epers.homes.HomeCache
-import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.epers.model.CacheSystem
 import ar.edu.unq.epers.model.Ubicacion
 import java.util.Date
-import ar.edu.unq.epers.model.Auto
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class ServicioCache {
@@ -24,14 +24,18 @@ class ServicioCache {
 		return true
 	}
 	
-	def guardarAutosDisponibles(List<Auto> autos, Ubicacion ubic, Date fechaIni, Date fechaFin){
+	def guardarAutosDisponibles(List<Integer> autos, Ubicacion ubic, Date fechaIni, Date fechaFin){
 		
-		val 
-		home.save(autoCacheado)
+		val autoACachear= new CacheSystem()
+		autoACachear.idDeAutosDisponibles = autos
+		autoACachear.ubicacion = ubic
+		autoACachear.fechaInicio = fechaIni
+		autoACachear.fechaFin = fechaFin
+		autoACachear.cacheId = asasre /algo random  
+		home.save(autoACachear)
 	}
 	
 	def obtenerAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){
-		
 		home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
 	}
 }
