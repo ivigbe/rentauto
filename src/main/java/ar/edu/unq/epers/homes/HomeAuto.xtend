@@ -41,8 +41,9 @@ class HomeAuto extends GenericHome<Auto>{
 
 	def getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin) {
 
-		val query = SessionManager::session.createQuery("from Auto as auto left join auto.reservas as reserva where ((reserva = null) or (:finicio > reserva.fin and :ffinal < reserva.inicio)) and 
-				((reserva != null) or (auto.ubicacionInicial = :ubi))")
+		val query = SessionManager::session.createQuery("from Auto as auto left join auto.reservas as reserva 
+															where ((reserva = null) or (:finicio > reserva.fin and :ffinal < reserva.inicio)) and 
+															((reserva != null) or (auto.ubicacionInicial = :ubi))")
 		
 		query.setDate("finicio", fechaInicio)
 		query.setDate("ffinal", fechaFin)

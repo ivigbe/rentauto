@@ -10,6 +10,7 @@ import java.util.Date
 class ServicioAuto {
 
 	HomeAuto home
+	ServicioCache cacheService
 
 	new(HomeAuto h) {
 		home = h
@@ -51,7 +52,11 @@ class ServicioAuto {
 
 	def disponibilidadDeAutos(Ubicacion ubicacion, Date fechaInicio, Date fechaFin) {
 		SessionManager.runInSession [|
-			home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
+			if(! (cacheService.estaEnCache(ubicacion, fechaInicio, fechaFin))){
+				val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
+				cacheService.guardarAutosDisponibles(autos, ubicacion, fechaInicio, fechaFin)
+			}
+			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)
 		]
 	}
 	
@@ -62,6 +67,8 @@ class ServicioAuto {
 			].toList
 		]
 	}
+	
+
 	
 
 }

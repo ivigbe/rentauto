@@ -100,10 +100,15 @@
 		</dependency>
 		
 		<dependency>
-            <groupId>com.impetus.kundera.client</groupId>
-            <artifactId>kundera-cassandra</artifactId>
-            <version>3.2</version>
-        </dependency>
+      		<groupId>com.datastax.cassandra</groupId>
+      		<artifactId>cassandra-driver-core</artifactId>
+      		<version>2.0.0</version>
+    	</dependency>
+    	<dependency>
+      		<groupId>org.easycassandra</groupId>
+      		<artifactId>EasyCassandra</artifactId>
+      		<version>2.0.2</version>
+    	</dependency>
 	</dependencies>
 
 	<build>
