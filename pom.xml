@@ -86,6 +86,24 @@
 			<artifactId>mongo-java-driver</artifactId>
 			<version>2.10.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cassandra</groupId>
+			<artifactId>cassandra-thrift</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.cassandra</groupId>
+			<artifactId>cassandra-clientutil</artifactId>
+			<version>2.2.3</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-cassandra</artifactId>
+            <version>3.2</version>
+        </dependency>
 	</dependencies>
 
 	<build>
