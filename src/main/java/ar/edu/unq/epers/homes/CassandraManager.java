@@ -3,10 +3,15 @@ package ar.edu.unq.epers.homes;
 import org.easycassandra.persistence.cassandra.ClusterInformation;
 import org.easycassandra.persistence.cassandra.EasyCassandraManager;
 import org.easycassandra.persistence.cassandra.Persistence;
+
+import com.datastax.driver.core.Cluster;
 import com.datastax.driver.core.Session;
 import ar.edu.unq.epers.model.CacheSystem;
 
+
 public class CassandraManager {
+	
+	/*
 	private static final CassandraManager INSTANCE = new CassandraManager();
 	
 	private EasyCassandraManager easyCassandraManager;
@@ -29,4 +34,7 @@ public class CassandraManager {
 	public static CassandraManager getInstance() {
 		return INSTANCE;
 	}
+	*/
+	
+	
 }
