@@ -26,8 +26,7 @@ class ServicioCache {
 	
 	def guardarAutosDisponibles(List<Auto> autos, Ubicacion ubic, Date fechaIni, Date fechaFin){
 		
-		val 
-		home.save(autoCacheado)
+		
 	}
 	
 	def obtenerAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){
