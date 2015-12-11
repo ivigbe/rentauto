@@ -5,35 +5,29 @@ import ar.edu.unq.epers.model.CacheSystem
 import ar.edu.unq.epers.model.Ubicacion
 import java.util.Date
 import java.util.List
-import org.easycassandra.persistence.cassandra.Persistence
 import org.eclipse.xtend.lib.annotations.Accessors
-
-
+import com.datastax.driver.core.Session
 
 @Accessors
 class HomeCache {
 	
-	private Persistence manager
-	
+	//private Persistence manager
+	private Session sesion;
 	new(){
-		this.manager = CassandraManager.INSTANCE.getPersistence();
+		//this.manager = CassandraManager.persistence
 	}
 	
 	def void save(CacheSystem cache) {
-		manager.insert(cache);
+		//manager.insert(cache);
 	}
 	
-	def void saveAutosDisponibles(List<Auto> autos) {
-		
-		manager.insert(autos);
+	def List<Integer> findByUbication(Ubicacion ubi) {
+		//return manager.findByIndex("ubicacion", ubi, Integer)
+		//return manager.findByIndex("ubicacion",ubi,Integer)
 	}
 	
-	def List<Auto> findByUbication(Ubicacion ubi) {
-		return manager.findByIndex("ubicacion", ubi, Auto)
-	}
-	
-	def Auto findOne(Ubicacion ubi) {
-		return manager.findByKey(ubi, Auto);
+	def Auto findCompuesto(Ubicacion ubi, Date fechaIni, Date fechaFin) {
+		//val rs = sesion.execute('''select value from''');
 	}
 	
 	def getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){
