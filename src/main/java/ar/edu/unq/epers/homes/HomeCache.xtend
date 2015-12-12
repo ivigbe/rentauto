@@ -1,37 +1,50 @@
 package ar.edu.unq.epers.homes
 
-import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.CacheSystem
 import ar.edu.unq.epers.model.Ubicacion
 import java.util.Date
 import java.util.List
+import javax.persistence.EntityManager
+import javax.persistence.EntityManagerFactory
+import javax.persistence.Persistence
 import org.eclipse.xtend.lib.annotations.Accessors
-import com.datastax.driver.core.Session
 
 @Accessors
 class HomeCache {
 	
-	//private Persistence manager
-	private Session sesion;
+	private EntityManagerFactory emf
+	private EntityManager em
+	
 	new(){
-		//this.manager = CassandraManager.persistence
+		this.emf = Persistence.createEntityManagerFactory("cassandra_pu")
+		this.em = emf.createEntityManager()
 	}
 	
 	def void save(CacheSystem cache) {
-		//manager.insert(cache);
+		em.persist(cache);
 	}
 	
-	def List<Integer> findByUbication(Ubicacion ubi) {
-		//return manager.findByIndex("ubicacion", ubi, Integer)
-		//return manager.findByIndex("ubicacion",ubi,Integer)
-	}
-	
-	def Auto findCompuesto(Ubicacion ubi, Date fechaIni, Date fechaFin) {
-		//val rs = sesion.execute('''select value from''');
-	}
-	
-	def getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){
+	def List<CacheSystem> findByUbication(Ubicacion ubi) {
+		val query = em.createQuery("select CacheSystem as cache where cache.ubicacion = :ubi")
 		
+		query.setParameter("ubi", ubi)
 		
+		val cache = query.resultList
+		
+		cache
 	}
+	
+	def List<CacheSystem> getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){ //VER QUE ONDA
+		
+		val query = em.createQuery("select CacheSystem as cache where cache.ubicacion like :ubi and cache.fechaInicio like :finicio and cache.fechaFin like :ffinal")
+		query.setParameter("finicio", fechaInicio)
+		query.setParameter("ffinal", fechaFin)
+		query.setParameter("ubi", ubicacion)
+		
+		val cache = query.resultList
+		em.close()
+		
+		cache
+	}
+	
 }

@@ -9,6 +9,10 @@ class ManagerCassandra {
 	Cluster cluster
 	Session session
 	//Mapper<T> mapper
+	
+	new(){
+		
+	}
 
 	def connect(String node) {
 		cluster = Cluster.builder().addContactPoint(node).build()

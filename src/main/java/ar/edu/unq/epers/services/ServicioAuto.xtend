@@ -53,12 +53,14 @@ class ServicioAuto {
 
 	def disponibilidadDeAutos(Ubicacion ubicacion, Date fechaInicio, Date fechaFin) {
 		SessionManager.runInSession [|
+			val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
 			if(! (cacheService.estaEnCache(ubicacion, fechaInicio, fechaFin))){
-				val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
 				val autosACachear = obtenerIds(autos)
 				cacheService.guardarAutosDisponibles(autosACachear, ubicacion, fechaInicio, fechaFin)
 			}
-			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)		
+			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)
+			
+			return autos
 		]
 	}
 	

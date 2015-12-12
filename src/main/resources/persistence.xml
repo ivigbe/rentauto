@@ -9,7 +9,7 @@
         <properties>            
             <property name="kundera.nodes" value="localhost"/>
             <property name="kundera.port" value="9042"/>
-            <property name="kundera.keyspace" value="KunderaExamples"/>
+            <property name="kundera.keyspace" value="TPCassandra"/>
             <property name="kundera.dialect" value="cassandra"/>
             <property name="kundera.client.lookup.class" value="com.impetus.client.cassandra.thrift.ThriftClientFactory" />      
         </properties>       

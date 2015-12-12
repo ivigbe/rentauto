@@ -21,7 +21,9 @@ class ServicioCache {
 	
 	def estaEnCache(Ubicacion u, Date fechaIni, Date fechaFin){
 		
-		return true
+		val autosCacheados = this.obtenerAutosDisponibles(u, fechaIni, fechaFin)
+		
+		return autosCacheados.size != 0
 	}
 	
 	def guardarAutosDisponibles(List<Integer> autos, Ubicacion ubic, Date fechaIni, Date fechaFin){
@@ -30,7 +32,7 @@ class ServicioCache {
 		autoACachear.ubicacion = ubic
 		autoACachear.fechaInicio = fechaIni
 		autoACachear.fechaFin = fechaFin
-		autoACachear.cacheId = null //algo random  
+		//autoACachear.cacheId = 0  
 		home.save(autoACachear)
 	}
 	

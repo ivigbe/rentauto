@@ -13,7 +13,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
 
 @Entity(name="cache")
-@Table(name="cacheTable", schema="CacheEntrega6@cassandra_pu")
+@Table(name="cacheTable", schema="TPCassandra@cassandra_pu")
 @Accessors
 class CacheSystem {
 
