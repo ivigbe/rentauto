@@ -1,60 +1,48 @@
 package ar.edu.unq.epers.model
 
+import com.datastax.driver.mapping.annotations.FrozenValue
+import com.datastax.driver.mapping.annotations.PartitionKey
+import com.datastax.driver.mapping.annotations.Table
+import com.datastax.driver.mapping.annotations.UDT
 import java.util.Date
 import java.util.List
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import org.apache.commons.lang3.builder.EqualsBuilder
-import org.apache.commons.lang3.builder.HashCodeBuilder
-import org.eclipse.xtend.lib.annotations.Accessors
-import javax.persistence.Table
 import org.apache.commons.lang3.builder.ToStringBuilder
 import org.apache.commons.lang3.builder.ToStringStyle
+import org.eclipse.xtend.lib.annotations.Accessors
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
-@Entity(name="cache")
-@Table(name="cacheTable", schema="TPCassandra@cassandra_pu")
+@EqualsHashCode
+@UDT(keyspace = "simplex", name = "cancion")
 @Accessors
 class CacheSystem {
-
-	@Id
+	
 	Integer cacheId
-
-	@Id
-	@Column(name="ubicacion")
 	Ubicacion ubicacion
-
-	@Id
-	@Column(name="fechaInicio")
 	Date fechaInicio
-
-	@Id
-	@Column(name="fechaFin")
 	Date fechaFin
-
-	@Column(name="autosDisponibles")
 	List<Integer> idDeAutosDisponibles = newArrayList()
 
-	new() {
-	}
-
-	@Override
-	override boolean equals(Object obj) {
-		if (obj instanceof CacheSystem) {
-			val other = CacheSystem.cast(obj)
-			return new EqualsBuilder().append(cacheId, other.cacheId).isEquals()
-		}
-		return false
-	}
-
-	@Override
-	override int hashCode() {
-		return new HashCodeBuilder().append(cacheId).toHashCode()
-	}
+	new(){}
 
 	@Override
 	override String toString() {
 
 		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE)
 	}
+	
+
+}
+	
+
+@Accessors
+@Table(keyspace = "simplex", name = "busquedaPorDia")
+class BusquedaPorCache {
+	@PartitionKey()
+    Ubicacion ubicacion
+    @PartitionKey(1)
+	Date fechaInicio
+	@PartitionKey(2)
+	Date fechaFin
+	@FrozenValue
+	List<Integer> idDeAutosDisponibles
 }

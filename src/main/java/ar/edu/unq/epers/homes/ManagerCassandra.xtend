@@ -3,12 +3,13 @@ package ar.edu.unq.epers.homes
 import com.datastax.driver.core.Cluster
 import com.datastax.driver.core.Host
 import com.datastax.driver.core.Session
-import scala.util.parsing.ast.Mappable.Mapper
+import ar.edu.unq.epers.model.BusquedaPorCache
+import com.datastax.driver.mapping.Mapper
 
 class ManagerCassandra {
 	Cluster cluster
 	Session session
-	//Mapper<T> mapper
+	Mapper<BusquedaPorCache> mapper
 	
 	new(){
 		
