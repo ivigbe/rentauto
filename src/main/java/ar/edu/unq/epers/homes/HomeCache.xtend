@@ -31,10 +31,10 @@ class HomeCache {
 		
 		val cache = query.resultList
 		
-		cache
+		return cache
 	}
 	
-	def List<CacheSystem> getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){ //VER QUE ONDA
+	def List<CacheSystem> getAutosDisponibles(Ubicacion ubicacion, Date fechaInicio, Date fechaFin){ 
 		
 		val query = em.createQuery("select CacheSystem as cache where cache.ubicacion like :ubi and cache.fechaInicio like :finicio and cache.fechaFin like :ffinal")
 		query.setParameter("finicio", fechaInicio)
@@ -44,7 +44,7 @@ class HomeCache {
 		val cache = query.resultList
 		em.close()
 		
-		cache
+		return cache
 	}
 	
 }
