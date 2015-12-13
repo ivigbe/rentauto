@@ -12,7 +12,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 @EqualsHashCode
-@UDT(keyspace = "simplex", name = "cancion")
+@UDT(keyspace = "simplex", name = "CacheSystem")
+@Table(keyspace = "simplex", name = "BusquedaPorCache")
 @Accessors
 class CacheSystem {
 	
@@ -20,7 +21,6 @@ class CacheSystem {
 	Ubicacion ubicacion
 	Date fechaInicio
 	Date fechaFin
-	List<Integer> idDeAutosDisponibles = newArrayList()
 
 	new(){}
 
@@ -35,7 +35,7 @@ class CacheSystem {
 	
 
 @Accessors
-@Table(keyspace = "simplex", name = "busquedaPorDia")
+
 class BusquedaPorCache {
 	@PartitionKey()
     Ubicacion ubicacion
@@ -44,5 +44,5 @@ class BusquedaPorCache {
 	@PartitionKey(2)
 	Date fechaFin
 	@FrozenValue
-	List<Integer> idDeAutosDisponibles
+	List<Integer> idDeAutosDisponibles = newArrayList()
 }

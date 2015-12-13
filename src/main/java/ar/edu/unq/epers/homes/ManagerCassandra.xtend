@@ -5,6 +5,7 @@ import com.datastax.driver.core.Host
 import com.datastax.driver.core.Session
 import ar.edu.unq.epers.model.BusquedaPorCache
 import com.datastax.driver.mapping.Mapper
+import com.datastax.driver.mapping.MappingManager
 
 class ManagerCassandra {
 	Cluster cluster
@@ -12,7 +13,8 @@ class ManagerCassandra {
 	Mapper<BusquedaPorCache> mapper
 	
 	new(){
-		
+		createSession()
+		createCacheSchema()
 	}
 
 	def connect(String node) {
@@ -27,6 +29,26 @@ class ManagerCassandra {
 
 	def close() {
 		cluster.close()
+	}
+	
+	def createCacheSchema(){
+		
+		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
+
+		session.execute("CREATE TYPE IF NOT EXISTS simplex.CacheSystem (" +
+			"cacheId int," + 
+			"ubicacion text," +
+			"fechaInicio text," +
+			"fechaFin text);"
+		)
+
+		session.execute("CREATE TABLE IF NOT EXISTS simplex.BusquedaPorCache (" + 
+				"ubicacion text, " + 
+				"fechaInicio text, " +
+				"fechaFin text," +
+				"idDeAutosDisponibles list< frozen<CacheSystem> >);"
+		)
+		mapper = new MappingManager(session).mapper(BusquedaPorCache)
 	}
 
 	def getSession() {
