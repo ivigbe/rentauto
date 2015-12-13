@@ -16,6 +16,8 @@ import static org.junit.Assert.*
 import org.junit.After
 
 class TestServicioRedSocial {
+	
+	/* 
 	Usuario u1
 	Usuario u2
 	Usuario u3
@@ -160,4 +162,5 @@ class TestServicioRedSocial {
 	def void cleanDB(){
 		perfil.homePublicacion.mongoCollection.drop
 	}
+*/
 }
