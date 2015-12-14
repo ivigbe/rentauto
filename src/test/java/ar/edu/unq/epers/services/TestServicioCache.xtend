@@ -11,6 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import static org.junit.Assert.*
 import java.util.Date
+import org.junit.After
 
 class TestServicioCache {
 	
@@ -37,13 +38,18 @@ class TestServicioCache {
 		
 		serviceCache = new ServicioCache(homeCache)
 		
-		serviceAuto.guardarAuto(mazda)
+		serviceAuto.guardarAuto(fiatCacheado)
 	}
 	
 	@Test
 	def testAutosNoCacheadosSeGuardanEnCache(){
-		val autosDisponibles = serviceAuto.disponibilidadDeAutos(capital, fechaIni, fechaFin)
+		val autosDisponibles = serviceCache.obtenerAutosDisponibles(capital, fechaIni, fechaFin)
 		
-		assertTrue(serviceCache.estaEnCache(capital, fechaIni, fechaFin))
+		assertTrue(autosDisponibles.idDeAutosDisponibles.size == 1)
+	}
+	
+	@After
+	def eliminarTablas() {
+		homeCache.getManagerCassandra.eliminarTablas()
 	}
 }

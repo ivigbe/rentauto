@@ -3,14 +3,16 @@ package ar.edu.unq.epers.homes
 import com.datastax.driver.core.Cluster
 import com.datastax.driver.core.Host
 import com.datastax.driver.core.Session
-import ar.edu.unq.epers.model.BusquedaPorCache
 import com.datastax.driver.mapping.Mapper
 import com.datastax.driver.mapping.MappingManager
+import ar.edu.unq.epers.model.CacheSystem
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class ManagerCassandra {
 	Cluster cluster
 	Session session
-	Mapper<BusquedaPorCache> mapper
+	Mapper<CacheSystem> mapper
 	
 	new(){
 		createSession()
@@ -46,9 +48,10 @@ class ManagerCassandra {
 				"ubicacion text, " + 
 				"fechaInicio text, " +
 				"fechaFin text," +
-				"idDeAutosDisponibles list< frozen<CacheSystem> >);"
+				"idDeAutosDisponibles list< frozen<CacheSystem> >," +
+				"PRIMARY KEY (ubicacion, fechaInicio, fechaFin);"
 		)
-		mapper = new MappingManager(session).mapper(BusquedaPorCache)
+		mapper = new MappingManager(session).mapper(CacheSystem)
 	}
 
 	def getSession() {
@@ -63,5 +66,10 @@ class ManagerCassandra {
 
 		val cluster = Cluster.builder().addContactPoint("localhost").build()
 		return cluster.connect()
+	}
+	
+	def eliminarTablas(){
+		session.execute("DROP KEYSPACE IF EXISTS simplex");
+		cluster.close();
 	}
 }

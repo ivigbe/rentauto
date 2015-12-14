@@ -13,11 +13,11 @@ import org.eclipse.xtend.lib.annotations.EqualsHashCode
 
 @EqualsHashCode
 @UDT(keyspace = "simplex", name = "CacheSystem")
-@Table(keyspace = "simplex", name = "BusquedaPorCache")
+@Table(keyspace = "simplex", name = "CacheSystem")
 @Accessors
 class CacheSystem {
 	
-	Integer cacheId
+	//Integer cacheId
 	
 	@PartitionKey()
     Ubicacion ubicacion
