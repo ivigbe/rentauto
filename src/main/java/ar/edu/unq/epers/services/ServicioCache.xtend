@@ -31,8 +31,7 @@ class ServicioCache {
 		autoACachear.idDeAutosDisponibles = autos
 		autoACachear.ubicacion = ubic
 		autoACachear.fechaInicio = fechaIni
-		autoACachear.fechaFin = fechaFin
-		//autoACachear.cacheId = 0  
+		autoACachear.fechaFin = fechaFin 
 		home.save(autoACachear)
 	}
 	

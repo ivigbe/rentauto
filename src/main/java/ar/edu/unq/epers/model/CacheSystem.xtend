@@ -18,9 +18,16 @@ import org.eclipse.xtend.lib.annotations.EqualsHashCode
 class CacheSystem {
 	
 	Integer cacheId
-	Ubicacion ubicacion
+	
+	@PartitionKey()
+    Ubicacion ubicacion
+    @PartitionKey(1)
 	Date fechaInicio
+	@PartitionKey(2)
 	Date fechaFin
+	@FrozenValue
+	List<Integer> idDeAutosDisponibles 
+	
 
 	new(){}
 
@@ -31,18 +38,4 @@ class CacheSystem {
 	}
 	
 
-}
-	
-
-@Accessors
-
-class BusquedaPorCache {
-	@PartitionKey()
-    Ubicacion ubicacion
-    @PartitionKey(1)
-	Date fechaInicio
-	@PartitionKey(2)
-	Date fechaFin
-	@FrozenValue
-	List<Integer> idDeAutosDisponibles = newArrayList()
 }
