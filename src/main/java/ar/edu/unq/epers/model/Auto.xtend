@@ -5,9 +5,11 @@ import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.mongojack.ObjectId
+import com.datastax.driver.mapping.annotations.UDT
 
 @Accessors
 //@EqualsHashCode //Para que genere los metodos equals y hashcode. Sirve para hacer la comparacion entre objetos
+@UDT(keyspace = "simplex", name = "Auto")
 class Auto {
 	String marca
 	String modelo

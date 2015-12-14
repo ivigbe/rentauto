@@ -5,14 +5,14 @@ import com.datastax.driver.core.Host
 import com.datastax.driver.core.Session
 import com.datastax.driver.mapping.Mapper
 import com.datastax.driver.mapping.MappingManager
-import ar.edu.unq.epers.model.CacheSystem
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.epers.model.BusquedaPorCache
 
 @Accessors
 class ManagerCassandra {
 	Cluster cluster
 	Session session
-	Mapper<CacheSystem> mapper
+	Mapper<BusquedaPorCache> mapper
 	
 	new(){
 		createSession()
@@ -37,8 +37,7 @@ class ManagerCassandra {
 		
 		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
 
-		session.execute("CREATE TYPE IF NOT EXISTS simplex.CacheSystem (" +
-			"cacheId int," + 
+		session.execute("CREATE TYPE IF NOT EXISTS simplex.CacheSystem (" + 
 			"ubicacion text," +
 			"fechaInicio text," +
 			"fechaFin text);"
@@ -51,7 +50,7 @@ class ManagerCassandra {
 				"idDeAutosDisponibles list< frozen<CacheSystem> >," +
 				"PRIMARY KEY (ubicacion, fechaInicio, fechaFin);"
 		)
-		mapper = new MappingManager(session).mapper(CacheSystem)
+		mapper = new MappingManager(session).mapper(BusquedaPorCache)
 	}
 
 	def getSession() {

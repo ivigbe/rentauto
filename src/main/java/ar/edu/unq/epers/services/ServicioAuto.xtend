@@ -53,34 +53,33 @@ class ServicioAuto {
 
 	def disponibilidadDeAutos(Ubicacion ubicacion, Date fechaInicio, Date fechaFin) {
 		SessionManager.runInSession [|
-			val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
-			if(! (cacheService.estaEnCache(ubicacion, fechaInicio, fechaFin))){
+			if (! (cacheService.estaEnCache(ubicacion, fechaInicio, fechaFin))) {
+				val autos = home.getAutosDisponibles(ubicacion, fechaInicio, fechaFin)
 				val autosACachear = obtenerIds(autos)
 				cacheService.guardarAutosDisponibles(autosACachear, ubicacion, fechaInicio, fechaFin)
+				return autos
+			} else {
+
+				val autos = cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)
+				return autos
 			}
-			cacheService.obtenerAutosDisponibles(ubicacion, fechaInicio, fechaFin)
-			
-			return autos
 		]
 	}
-	
+
 	def obtenerIds(List<Auto> autos) {
 		val ids = newArrayList()
-		for(Auto a : autos){
+		for (Auto a : autos) {
 			ids.add(a.autoId)
 		}
 		return ids
 	}
-	
+
 	def obtenerAutosPor(Ubicacion origen, Ubicacion destino, Date finicio, Date ffin, Categoria categoria) {
 		SessionManager.runInSession [|
-			home.obtenerAutosPor(origen, destino, finicio, ffin, categoria).filter[
+			home.obtenerAutosPor(origen, destino, finicio, ffin, categoria).filter [
 				it.ubicacionParaDia(finicio) == origen
 			].toList
 		]
 	}
-	
-
-	
 
 }
